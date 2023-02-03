@@ -19,12 +19,16 @@ const contents = ref<Contents>([
 ])
 
 const appConfig = useAppConfig()
-const mainColor = ref(appConfig.theme.colors.main)
+const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 </script>
 
 <template>
     <div class="header-root">
-        <span></span>
+        <span>
+            <NuxtLink v-if="$route.path !== '/'" class="back" to="/">
+                ←ホームに戻る
+            </NuxtLink>
+        </span>
         <NuxtLink v-for="content in contents" class="content set-item-center" :to="content.link" :target="content.target" rel="noopener">
             <!-- <span class="title" :to="content.link" :target="content.target" rel="noopener">{{ content.title }}</span> -->
             <span class="title">{{ content.title }}</span>
@@ -32,22 +36,42 @@ const mainColor = ref(appConfig.theme.colors.main)
     </div>
 </template>
 
-<style>
+<style scoped>
 .header-root{
     display: grid;
     grid-template-rows: 40px;
     grid-template-columns: 75% 1fr 1fr 1fr;
     height: 3.5vh;
-    background-color: v-bind(mainColor);
+    background-color: v-bind(mainDarkColor);
 }
 .content{
     font-size: 14px;
-    padding: 1%;
+    height: 3.5vh;
     text-decoration: none;
+    color: aliceblue;
+}
+.content:hover{
+    background-color: rgba(193, 193, 193, 0.2);
+}
+.content:active{
+    background-color: rgba(193, 193, 193, 0.5);
 }
 .set-item-center{
 /** アイテムを中央にそろえる */
     display: grid;
     place-items: center;
+}
+
+.back{
+    font-size: 14px;
+    width: 12vw;
+    height: 3.5vh;
+    text-decoration: none;
+    display: grid;
+    place-items: center;
+    color: aliceblue;
+}
+.back:hover{
+    background-color: rgba(193, 193, 193, 0.3);
 }
 </style>
