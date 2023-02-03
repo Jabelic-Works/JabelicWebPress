@@ -18,7 +18,6 @@ articleList.value = contents.value
 </script>
 <template>
     <div class="root">
-        {{ articleList }}
         <template v-if="articleList">
             <div v-for="article in articleList.contents" class="article">
                 <ArticleCard
