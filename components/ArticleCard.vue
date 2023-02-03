@@ -1,32 +1,52 @@
 <script setup lang="ts">
-console.debug("sdfsdf")
+interface Article {
+  enTitle: string;
+  jpTitle: string;
+  description: string;
+  tags: Array<string> | null;
+  to: string
+}
+
+const Props = withDefaults(defineProps<Article>(), {
+  enTitle: "default",
+  jpTitle: "デフォルト",
+  description: "説明説明説明説明説明説明",
+  tags: null,
+  to: "/"
+});
+const appConfig = useAppConfig()
+const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 </script>
 <template>
-    <section class="card">
-        <div class="card-content">
-            <h1 class="card-title">Webクリエイターボックス</h1>
-            <p class="card-text">WebデザインやWebサイト制作、最新のWeb業界情報などを紹介していくサイト。</p>
-        </div>
-        <div class="card-link">
-            <a href="http://webcreatorbox.com/about">About</a>
-            <a href="http://webcreatorbox.com/">Website</a>
-        </div>
-    </section>
+    <NuxtLink :to="Props.to">
+        <section class="card">
+            <div class="card-content">
+                <h1 class="card-title">{{ Props.jpTitle }}</h1>
+                <p class="card-text">{{ Props.description }}</p>
+            </div>
+            <div class="tags">
+            </div>
+            <!-- <div class="card-link">
+                <a href="http://webcreatorbox.com/about">About</a>
+                <a href="http://webcreatorbox.com/">Website</a>
+            </div> -->
+        </section>
+    </NuxtLink>
 </template>
 <style>
 .card {
-  background: #fff;
+  background: black;
+  border: 0.3rem solid;
+  border-color: v-bind(mainDarkColor);
   border-radius: 5px;
-  box-shadow: 0 2px 5px #ccc;
+  box-shadow: 0 1px 2px #ccc;
 }
 .card-content {
-  /* padding: 20px; */
   padding: 2%;
 }
 .card-title {
   font-size: 20px;
   margin-bottom: 20px;
-  /* text-align: center; */
   text-align: start;
   color: #333;
 }
@@ -34,6 +54,12 @@ console.debug("sdfsdf")
   color: #777;
   font-size: 14px;
   line-height: 1.5;
+}
+.cart-tags{
+    display: grid;
+}
+.card-tag{
+    display: grid;
 }
 .card-link {
   text-align: center;

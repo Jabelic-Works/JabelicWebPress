@@ -7,5 +7,15 @@ export default defineNuxtConfig({
     public: {
       apiBase: '/api'
     }
-  }
+  },
+  css: ['~/assets/style/_reset.css', '~/assets/style/index.css'],
+  // vite: {
+  //   css: {
+  //     preprocessorOptions: {
+  //       scss: {
+  //         additionalData: '@use "@/assets/_reset.css;"'
+  //       }
+  //     }
+  //   }
+  // }
 })
