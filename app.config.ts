@@ -8,5 +8,5 @@ export default defineAppConfig({
             mainDark: '#245941',
             accent: '#C532C7'
         }
-    }
+    },
 })

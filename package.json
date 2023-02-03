@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --dotenv .env.dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -11,6 +11,8 @@
     "nuxt": "^3.1.1"
   },
   "dependencies": {
-    "nuxt-microcms-module": "^2.0.1"
+    "@types/highlight.js": "^10.1.0",
+    "highlight.js": "^11.7.0",
+    "microcms-js-sdk": "^2.3.2"
   }
 }
