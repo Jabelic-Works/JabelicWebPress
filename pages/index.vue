@@ -11,9 +11,9 @@
 <style scoped>
 
 .sub-header{
-    padding-left: 1%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding-left: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 h1{
     font-size: 40px;

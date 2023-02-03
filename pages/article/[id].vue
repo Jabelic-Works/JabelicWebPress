@@ -59,6 +59,10 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
 </template>
 
 <style scoped>
+.root{
+    border-top: dashed red;
+    border-top: thick double white;
+}
 .title{
     background-color: #245941;
     width: 100vw;
