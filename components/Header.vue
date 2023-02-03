@@ -24,7 +24,11 @@ const mainColor = ref(appConfig.theme.colors.main)
 
 <template>
     <div class="header-root">
-        <span></span>
+        <span>
+            <NuxtLink v-if="$route.path !== '/'" class="back" to="/">
+                ←ホームに戻る
+            </NuxtLink>
+        </span>
         <NuxtLink v-for="content in contents" class="content set-item-center" :to="content.link" :target="content.target" rel="noopener">
             <!-- <span class="title" :to="content.link" :target="content.target" rel="noopener">{{ content.title }}</span> -->
             <span class="title">{{ content.title }}</span>
@@ -49,5 +53,17 @@ const mainColor = ref(appConfig.theme.colors.main)
 /** アイテムを中央にそろえる */
     display: grid;
     place-items: center;
+}
+
+.back{
+    font-size: 14px;
+    width: 12vw;
+    height: 3.5vh;
+    text-decoration: none;
+    display: grid;
+    place-items: center;
+}
+.back:hover{
+    background-color: rgba(193, 193, 193, 0.3);
 }
 </style>
