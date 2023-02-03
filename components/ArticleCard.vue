@@ -1,22 +1,27 @@
 <script setup lang="ts">
+
+// adapter
 interface Article {
   enTitle: string;
   jpTitle: string;
   description: string;
   tags: Array<string> | null;
-  to: string
+  to: string;
+  id: string
 }
-
 const Props = withDefaults(defineProps<Article>(), {
   enTitle: "default",
   jpTitle: "デフォルト",
   description: "説明説明説明説明説明説明",
   tags: null,
-  to: "/"
+  to: "/",
+  id: ""
 });
 const appConfig = useAppConfig()
 const mainDarkColor = ref(appConfig.theme.colors.mainDark)
+const mainColor = ref(appConfig.theme.colors.main)
 </script>
+
 <template>
     <NuxtLink :to="Props.to">
         <section class="card">
@@ -24,22 +29,27 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
                 <h1 class="card-title">{{ Props.jpTitle }}</h1>
                 <p class="card-text">{{ Props.description }}</p>
             </div>
-            <div class="tags">
+            <div v-if="Props.tags" class="card-tags">
+              <span v-for="tag in Props.tags" class="card-tag">
+                <Tag :title="tag"/>
+              </span>
             </div>
-            <!-- <div class="card-link">
-                <a href="http://webcreatorbox.com/about">About</a>
-                <a href="http://webcreatorbox.com/">Website</a>
-            </div> -->
         </section>
     </NuxtLink>
 </template>
-<style>
+
+<style scoped>
 .card {
   background: black;
-  border: 0.3rem solid;
+  border: 0.1rem solid;
   border-color: v-bind(mainDarkColor);
   border-radius: 5px;
   box-shadow: 0 1px 2px #ccc;
+  border-radius: 0.5rem;
+}
+.card:hover, .card:active{
+  box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, .5);
+  border: solid 0.1rem v-bind(mainColor);
 }
 .card-content {
   padding: 2%;
@@ -48,7 +58,7 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
   font-size: 20px;
   margin-bottom: 20px;
   text-align: start;
-  color: #333;
+  color: white;
 }
 .card-text {
   color: #777;
@@ -57,9 +67,12 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 }
 .cart-tags{
     display: grid;
+    grid-template-columns: 75% 1fr 1fr 1fr;
+    height: 3.5vh;
 }
 .card-tag{
-    display: grid;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
 }
 .card-link {
   text-align: center;
@@ -74,4 +87,5 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 .card-link a:hover {
   color: #0090aa;
 }
+
 </style>

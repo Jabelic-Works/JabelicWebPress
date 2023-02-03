@@ -20,8 +20,8 @@ const contents = ref<Contents>([
 
 const appConfig = useAppConfig()
 const mainColor = ref(appConfig.theme.colors.main)
-
 </script>
+
 <template>
     <div class="header-root">
         <span></span>
@@ -31,6 +31,7 @@ const mainColor = ref(appConfig.theme.colors.main)
         </NuxtLink>
     </div>
 </template>
+
 <style>
 .header-root{
     display: grid;
