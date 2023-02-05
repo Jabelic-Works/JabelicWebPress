@@ -23,4 +23,14 @@ h3{
     font-size: 20px;
     padding-top: 1%;
 }
+@media screen and (max-width:768px){
+    h1{
+        font-size: 30px;
+        padding-top: 3%;
+    }
+    h3{
+        font-size: 16px;
+        padding-top: 3%;
+    }
+}
 </style>
