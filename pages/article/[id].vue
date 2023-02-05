@@ -41,7 +41,9 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
                     </div>
                 </div>
                 <li v-for="h1 in structuredMenu" class="menu-bar-item">
+                    <a :href="$route.path+`#${h1.id}`" @click.stop="closeMenu">
                     {{ h1.text }}
+                    </a>
                     <li v-for="h2 in h1.child" class="menu-bar-item">
                         <a :href="$route.path+`#${h2.id}`" @click.stop="closeMenu">
                             {{ h2.text }}
@@ -68,20 +70,20 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
     width: 100vw;
     height: 5vh;
     font-size: 1.8rem;
+    padding-left: 1rem;
     display: grid;
     /* place-items: 縦 横;  */
     place-items: center start;
 }
 .content {
   display: grid;
-  grid-template-columns: 5vw 90vw;
+  grid-template-columns: 5vw 95vw;
   padding: 0%;
   position: relative
 }
 .menu{
     background-color: #245941;
 }
-
 .menu-btn{
     height: 7vh;
     display: grid;
@@ -153,6 +155,12 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
 .root :deep(h2){
     font-size: 26px;
     margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+.root :deep(h3){
+    font-size: 22px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 /** コードブロック */
 .root :deep(pre){
@@ -197,5 +205,104 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
     display: block;
     margin: auto;
     margin-top: 1em;
+}
+
+@media screen and (max-width:768px){
+    .title{
+        background-color: #245941;
+        width: 100vw;
+        height: 4vh;
+        font-size: 1.1rem;
+        display: grid;
+        /* place-items: 縦 横;  */
+        place-items: center start;
+    }
+    .content {
+        display: grid;
+        grid-template-columns: 8vw 92vw;
+        padding: 0%;
+        position: relative
+    }
+    .menu-btn{
+        height: 7vh;
+        display: grid;
+        place-content: center;
+    }
+    .menu-bar{
+        width: 60vw;
+        height: 100%;
+        background-color: #245941;
+        /*
+            親要素が position: relative; (or fixed) であれば
+            子要素がposition: absolute;のときに 親要素の左上が起点となる
+        */
+        position: absolute;
+        top: 0vh;
+        left: 0px;
+        z-index: 100;
+    }
+    .article{
+        padding: 3vw;
+        margin: 3vw;
+    }
+    .root :deep(h1){
+        font-size: 26px;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
+    .root :deep(h2){
+        font-size: 22px;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
+    .root :deep(h3){
+        font-size: 18px;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+    }
+    /** コードブロック */
+    .root :deep(pre){
+        margin-top: 1em;
+        background-color: rgba(20, 20, 20, 0.9);
+        overflow-x: scroll;
+        padding: 1vh;
+    }
+    /** コード */
+    .root :deep(code){
+        background-color: rgba(20, 20, 20, 0.9);
+        /* overflow-x: scroll;
+        padding: 1rem; */
+    }
+    .root :deep(pre) :deep(code){
+        font-size: 12px;
+        padding: 0rem;
+        background-color: rgba(20, 20, 20, 0);
+    }
+    .root :deep(p){
+        font-size: 10px;
+        margin-top: 1em;
+    }
+    .root :deep(ul){
+        font-size: 10px;
+        margin-top: 1em;
+    }
+    .root :deep(li){
+        font-size: 10px;
+        margin-top: 1em;
+    }
+    .root :deep(a){
+        font-size: 10px;
+        margin-top: 1em;
+        color: yellow;
+    }
+    .root :deep(a:hover){
+        color: rgba(30, 255, 0, 0.9);
+    }
+    .root :deep(img){
+        width: 90%;
+        display: block;
+        margin: auto;
+        margin-top: 1em;
+    }
 }
 </style>

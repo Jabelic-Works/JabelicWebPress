@@ -87,5 +87,13 @@ const mainColor = ref(appConfig.theme.colors.main)
 .card-link a:hover {
   color: #0090aa;
 }
-
+@media screen and (max-width:768px){
+  .card-title {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: start;
+    color: white;
+}
+}
 </style>

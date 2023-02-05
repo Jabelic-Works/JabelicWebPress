@@ -74,4 +74,19 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 .back:hover{
     background-color: rgba(193, 193, 193, 0.3);
 }
+@media screen and (max-width:768px){
+    .header-root{
+        display: grid;
+        grid-template-rows: 40px;
+        grid-template-columns: 50% 1fr 1fr 1fr;
+        height: 3.5vh;
+        background-color: v-bind(mainDarkColor);
+    }
+    .back{
+        font-size: 10px;
+        width: 20vw;
+        height: 3.5vh;
+    }
+}
+
 </style>
