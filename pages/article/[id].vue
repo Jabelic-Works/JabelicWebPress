@@ -41,7 +41,9 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
                     </div>
                 </div>
                 <li v-for="h1 in structuredMenu" class="menu-bar-item">
+                    <a :href="$route.path+`#${h1.id}`" @click.stop="closeMenu">
                     {{ h1.text }}
+                    </a>
                     <li v-for="h2 in h1.child" class="menu-bar-item">
                         <a :href="$route.path+`#${h2.id}`" @click.stop="closeMenu">
                             {{ h2.text }}
@@ -68,6 +70,7 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
     width: 100vw;
     height: 5vh;
     font-size: 1.8rem;
+    padding-left: 1rem;
     display: grid;
     /* place-items: 縦 横;  */
     place-items: center start;
@@ -301,7 +304,5 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
         margin: auto;
         margin-top: 1em;
     }
-
-
 }
 </style>
