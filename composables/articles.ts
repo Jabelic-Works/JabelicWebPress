@@ -1,5 +1,4 @@
 import { createClient, MicroCMSListResponse } from 'microcms-js-sdk';
-// import { RuntimeConfig } from '@nuxt/schema';
 
 export const useArticle = async (apiKey: string)=>{
     type Article = {
@@ -10,17 +9,13 @@ export const useArticle = async (apiKey: string)=>{
     }
     const getArticleList = async () => {
         try {
-            console.debug(apiKey)
             if(!apiKey) return
-            const { data, pending, error, refresh } = await useFetch("https://jabelicwebpress.microcms.io/api/v1/blogs", {
+            const { data, pending, error, refresh } = await useFetch<MicroCMSListResponse<any>>("https://jabelicwebpress.microcms.io/api/v1/blogs", {
                 headers:{
                     "X-MICROCMS-API-KEY": apiKey
                 }
             })
             return data
-            // const client = createClient({ serviceDomain: 'jabelicwebpress', apiKey });
-            // const articleList = await client.getList({ endpoint: 'blogs'})
-            // return articleList
         } catch (error) {
             console.error(error)
         }

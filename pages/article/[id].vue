@@ -9,7 +9,16 @@ const { data: contents, pending, error, refresh } = await useFetch<Article>("htt
         "X-MICROCMS-API-KEY": config.apikey
     },
 })
-const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(contents)
+
+/** All listed items must be kind of heading tag(h1, h2, h3, ...) */
+type ListedMenu  = Array<{
+    text: string;
+    id: string|undefined;
+    child: Array<ListedMenu>
+}>
+const { structuredMenu } = useHtmlParser(contents)
+const { menu, transition, transitionTimeoutMs, openMenu, closeMenu } = useMenu(contents)
+const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 
 </script>
 
@@ -31,10 +40,10 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
             <div v-html="contents?.content" class="article"></div>
 
             <!-- overlay -->
-            <div v-if="menu.isOpen"  @click="closeMenu" class="blur"></div>
+            <div v-if="menu.isOpen"  @click="closeMenu" class="shadow" :class="{'fadeout':transition}"></div>
 
             <!-- menu bar -->
-            <div v-if="menu.isOpen" class="menu-bar">
+            <div v-if="menu.isOpen" class="menu-bar menu-bar-transition" :class="{ 'fadeOutToRight' : transition }">
                 <div @click.stop="closeMenu" class="close-menu-btn-row">
                     <div class="close-menu-btn">
                         x
@@ -67,7 +76,6 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
 }
 .title{
     background-color: #245941;
-    width: 100vw;
     height: 5vh;
     font-size: 1.8rem;
     padding-left: 1rem;
@@ -89,6 +97,41 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
     display: grid;
     place-content: center;
 }
+
+/* 左から右にフェードイン */
+.menu-bar-transition{
+    animation-name:fadeLeftAnime;
+    animation-duration:v-bind(animationDuration);
+    animation-fill-mode:forwards;
+    opacity:0;
+}
+@keyframes fadeLeftAnime{
+  from {
+    opacity: 0;
+  transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+  transform: translateX(0);
+  }
+}
+
+/* 右から左へフェードアウト */
+.fadeOutToRight{
+    animation: fadeout v-bind(animationDuration) ease 0s 1 forwards;
+  }
+  @keyframes fadeout {
+  0% {
+     opacity: 1;
+     transform: translateX(0);
+  }
+  100% {
+     opacity: 0;
+     transform: translateX(-30vw);
+  }
+}
+
 .menu-btn-img{
     height: 5vh;
     display: grid;
@@ -113,13 +156,29 @@ const { menu ,openMenu, closeMenu, menuContent, structuredMenu } = useMenu(conte
     top: 0vh;
     left: 0px;
     z-index: 100;
+    transition: all 0.2s 1s ease-in-out;
 }
-.blur{
+.shadow{
     position: absolute;
     left: 0; top: 0;
     width: 100%; height: 100%;
     background: rgba(100, 100, 100, .8);
+    animation: fadein v-bind(animationDuration) ease 0s 1 forwards;
 }
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+/** 背景要素(白い影)をfadeoutさせる */
+.shadow.fadeout{
+    animation: fadeout v-bind(animationDuration) ease 0s 1 forwards;
+}
+@keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
 .close-menu-btn-row{
     display: grid;
     place-content: center end;

@@ -30,7 +30,6 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
             </NuxtLink>
         </span>
         <NuxtLink v-for="content in contents" class="content set-item-center" :to="content.link" :target="content.target" rel="noopener">
-            <!-- <span class="title" :to="content.link" :target="content.target" rel="noopener">{{ content.title }}</span> -->
             <span class="title">{{ content.title }}</span>
         </NuxtLink>
     </div>
@@ -41,12 +40,12 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
     display: grid;
     grid-template-rows: 40px;
     grid-template-columns: 75% 1fr 1fr 1fr;
-    height: 3.5vh;
+    height: 4vh;
     background-color: v-bind(mainDarkColor);
 }
 .content{
     font-size: 14px;
-    height: 3.5vh;
+    height: 4vh;
     text-decoration: none;
     color: aliceblue;
 }
@@ -65,7 +64,7 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 .back{
     font-size: 14px;
     width: 12vw;
-    height: 3.5vh;
+    height: 4vh;
     text-decoration: none;
     display: grid;
     place-items: center;

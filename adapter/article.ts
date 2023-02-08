@@ -9,5 +9,4 @@ export interface Article{
     content: string,
     eyecatch: string,
     category: string
-  }
-  
+}
