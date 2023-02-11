@@ -14,7 +14,6 @@ const contents = await useFetchBlogList()
 watch(()=>store.getLocale, async (arg)=>{
     const _contents = await useFetchBlogList()
     contents.value = _contents.value
-    console.debug(arg)
 })
 </script>
 

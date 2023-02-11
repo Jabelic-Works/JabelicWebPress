@@ -1,8 +1,8 @@
 import { defineStore } from "pinia"
-import { Locales } from "~~/model/locale"
+import { locales, Locales } from "~~/model/locale"
 
 export const useLocaleStore = defineStore('localeStore', {
-    state: () => ({locale: 'en'}),
+    state: (): {locale: Locales} => ({locale: locales.default}),
     getters: {
       getLocale: (state) => state.locale,
     },

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Locales } from '~~/model/locale';
+import { locales, Locales } from '~~/model/locale';
 import { useLocaleStore } from '~~/store/locale';
+const router = useRouter()
 
-
+/** 右上メニュー */
 type Contents = Array<{title: string, link: string, target: '_blank' | null}>
 const contents = ref<Contents>([
     {
@@ -21,32 +22,35 @@ const contents = ref<Contents>([
         target: '_blank'
     }
 ])
+
+/** カラー */
 const appConfig = useAppConfig()
 const mainDarkColor = ref(appConfig.theme.colors.mainDark)
-const router = useRouter()
-const backTo = ()=>router.back()
-const locale = ref<Locales>('en')
-const store = useLocaleStore()
-watch(locale,(arg)=>{ 
-    store.switchLang(arg)
-    console.debug(arg)
-})
 
+/** 戻るボタン */
+const backTo = ()=>router.back()
+
+/** i18n */
+const locale = ref<Locales>(locales.default)
+const store = useLocaleStore()
+watch(locale,(arg)=>{ store.switchLang(arg) })
 </script>
 
 <template>
     <div class="header-root">
-        <span>
+        <span class="left">
             <NuxtLink v-if="$route.path !== '/'" class="back" @click="backTo()">
                 ←戻る
             </NuxtLink>
-            <form>
-            <label for="locale-select">language: </label>
-            <select id="locale-select" v-model="locale">
-                <option value="en">English</option>
-                <option value="ja">日本語</option>
-            </select>
-            </form>
+            <div class="lang-switch">
+                <form class="switch-form">
+                    <label for="locale-select">language: </label>
+                    <select id="locale-select" v-model="locale">
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </form>
+            </div>
         </span>
         <NuxtLink v-for="content in contents" class="content set-item-center" :to="content.link" :target="content.target" rel="noopener">
             <span class="title">{{ content.title }}</span>
@@ -63,6 +67,19 @@ watch(locale,(arg)=>{
     background-color: v-bind(mainDarkColor);
     /* position: fixed; */
 }
+.left{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.lang-switch{
+    display: flex;
+    justify-content: center;
+}
+.switch-form{
+    margin: auto;
+    text-align:center;
+}
+
 .content{
     font-size: 14px;
     height: 4vh;
