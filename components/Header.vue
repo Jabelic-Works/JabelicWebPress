@@ -28,7 +28,7 @@ const backTo = ()=>router.back()
     <div class="header-root">
         <span>
             <NuxtLink v-if="$route.path !== '/'" class="back" @click="backTo()">
-                ←ホームに戻る
+                ←戻る
             </NuxtLink>
         </span>
         <NuxtLink v-for="content in contents" class="content set-item-center" :to="content.link" :target="content.target" rel="noopener">
