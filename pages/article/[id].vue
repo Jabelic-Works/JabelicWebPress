@@ -1,14 +1,25 @@
 <script setup lang="ts">
 import { RuntimeConfig } from '@nuxt/schema';
 import { Article } from '@/adapter/article';
+import { useLocaleStore } from '~~/store/locale';
 
 const config:RuntimeConfig = useRuntimeConfig()
 const route = useRoute()
-const { data: contents, pending, error, refresh } = await useFetch<Article>("https://jabelicwebpress.microcms.io/api/v1/blogs"+`/${route.params.id}`, {
-    headers:{
-        "X-MICROCMS-API-KEY": config.apikey
-    },
+const store = useLocaleStore()
+// const { data: contents, pending, error, refresh } = await useFetch<Article>("https://jabelicwebpress.microcms.io/api/v1/blogs"+`/${route.params.id}`, {
+//     headers:{
+//         "X-MICROCMS-API-KEY": config.apikey
+//     },
+// })
+const contents = await useFetchBlogContent()
+
+watch(()=>store.getLocale, async (arg)=>{
+    const _contents = await useFetchBlogContent()
+    contents.value = _contents.value
 })
+
+
+
 
 /** All listed items must be kind of heading tag(h1, h2, h3, ...) */
 type ListedMenu  = Array<{

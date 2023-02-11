@@ -6,21 +6,9 @@ const router = useRouter()
 /** 右上メニュー */
 type Contents = Array<{title: string, link: string, target: '_blank' | null}>
 const contents = ref<Contents>([
-    {
-        title: 'Home',
-        link: '/',
-        target: null
-    },
-    {
-        title: 'Profile',
-        link: '/profile',
-        target: null
-    },
-    {
-        title: 'GitHub',
-        link: 'https://github.com/jabelic',
-        target: '_blank'
-    }
+    { title: 'Home', link: '/', target: null },
+    { title: 'Profile', link: '/profile', target: null },
+    { title: 'GitHub', link: 'https://github.com/jabelic', target: '_blank' }
 ])
 
 /** カラー */
@@ -31,9 +19,11 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 const backTo = ()=>router.back()
 
 /** i18n */
-const locale = ref<Locales>(locales.default)
 const store = useLocaleStore()
+const locale = ref<Locales>(store.getLocale)
+const route = useRoute()
 watch(locale,(arg)=>{ store.switchLang(arg) })
+const isShowLangSwitcher = computed(()=>!route.path.includes('article'))
 </script>
 
 <template>
@@ -42,7 +32,7 @@ watch(locale,(arg)=>{ store.switchLang(arg) })
             <NuxtLink v-if="$route.path !== '/'" class="back" @click="backTo()">
                 ←戻る
             </NuxtLink>
-            <div class="lang-switch">
+            <div v-if="isShowLangSwitcher" class="lang-switch">
                 <form class="switch-form">
                     <label for="locale-select">language: </label>
                     <select id="locale-select" v-model="locale">
