@@ -16,7 +16,7 @@ setTimeout(() => {trans.value = false}, 2500);
     <div class="root">
         <div class="sub-header">
             <h1>Jabelic Web Press</h1>
-            <h3>小さく書いて大きく育てる</h3>
+            <h2>小さく書いて大きく育てる</h2>
         </div>
         <Contents/>
     </div>
