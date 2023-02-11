@@ -68,7 +68,7 @@ const backTo = ()=>router.back()
 
 .back{
     font-size: 14px;
-    width: 20vw;
+    width: 10vw;
     height: 4vh;
     text-decoration: none;
     display: grid;
@@ -92,7 +92,7 @@ const backTo = ()=>router.back()
     }
     .back{
         font-size: 10px;
-        width: 30vw;
+        width: 15vw;
         height: 4vh;
     }
     .content{

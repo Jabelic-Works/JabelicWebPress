@@ -106,7 +106,7 @@ setTimeout(() => { trans.value = false }, 2500);
 .menu{
     background-color: rgba(36, 89, 65, 1);
     width: 5vw;
-    box-shadow: 2px 1px 2px  rgba(83, 235, 60, 0.224);
+    box-shadow: 0.2rem 0.3rem 0.3rem  rgba(83, 235, 60, 0.224);
 }
 .menu-btn{
     /* height: 100vh; */
@@ -199,6 +199,7 @@ setTimeout(() => { trans.value = false }, 2500);
 /** 背景要素(白い影)をfadeoutさせる */
 .shadow.fadeout{
     animation: fadeout v-bind(animationDuration) ease 0s 1 forwards;
+    height: 120%;
 }
 @keyframes fadeout {
   0% { opacity: 1; }
@@ -314,7 +315,6 @@ setTimeout(() => { trans.value = false }, 2500);
         display: grid;
         grid-template-columns: 8vw 92vw;
         padding: 0%;
-        position: relative
     }
     .menu-btn{
         display: grid;
@@ -322,13 +322,8 @@ setTimeout(() => { trans.value = false }, 2500);
     }
     .menu-bar{
         width: 60vw;
-        height: 100%;
+        height: 120%;
         background-color: #245941;
-        /*
-            親要素が position: relative; (or fixed) であれば
-            子要素がposition: absolute;のときに 親要素の左上が起点となる
-        */
-        position: absolute;
         top: 0vh;
         left: 0px;
         z-index: 1;
