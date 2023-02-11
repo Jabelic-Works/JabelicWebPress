@@ -46,10 +46,12 @@ const mainColor = ref(appConfig.theme.colors.main)
   border-radius: 5px;
   box-shadow: 0 1px 2px #ccc;
   border-radius: 0.5rem;
+  transition: 0.5s;
 }
 .card:hover, .card:active{
   box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, .5);
   border: solid 0.1rem v-bind(mainColor);
+  color: yellow;
 }
 .card-content {
   padding: 2%;
@@ -59,6 +61,12 @@ const mainColor = ref(appConfig.theme.colors.main)
   margin-bottom: 20px;
   text-align: start;
   color: white;
+}
+.card-title:hover{
+  color: yellow;
+}
+.card-title:active{
+  color: rgba(30, 255, 0, 0.9);
 }
 .card-text {
   color: #777;
@@ -82,10 +90,13 @@ const mainColor = ref(appConfig.theme.colors.main)
 .card-link a {
   text-decoration: none;
   color: #0bd;
+  color: rgba(30, 255, 0, 0.9);
   margin: 0 10px;
+  transition: 0.5s;
 }
 .card-link a:hover {
   color: #0090aa;
+  color: rgba(30, 255, 0, 0.9);
 }
 @media screen and (max-width:768px){
   .card-title {
@@ -94,6 +105,9 @@ const mainColor = ref(appConfig.theme.colors.main)
     margin-bottom: 20px;
     text-align: start;
     color: white;
-}
+  }
+  .card-title:active{
+    color: rgba(30, 255, 0, 0.9);
+  }
 }
 </style>

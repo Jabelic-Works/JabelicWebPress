@@ -20,12 +20,14 @@ const contents = ref<Contents>([
 
 const appConfig = useAppConfig()
 const mainDarkColor = ref(appConfig.theme.colors.mainDark)
+const router = useRouter()
+const backTo = ()=>router.back()
 </script>
 
 <template>
     <div class="header-root">
         <span>
-            <NuxtLink v-if="$route.path !== '/'" class="back" to="/">
+            <NuxtLink v-if="$route.path !== '/'" class="back" @click="backTo()">
                 ←ホームに戻る
             </NuxtLink>
         </span>
@@ -42,18 +44,21 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
     grid-template-columns: 75% 1fr 1fr 1fr;
     height: 4vh;
     background-color: v-bind(mainDarkColor);
+    /* position: fixed; */
 }
 .content{
     font-size: 14px;
     height: 4vh;
     text-decoration: none;
     color: aliceblue;
+    transition: 0.5s;
 }
 .content:hover{
-    background-color: rgba(193, 193, 193, 0.2);
+    text-decoration:underline;
 }
 .content:active{
-    background-color: rgba(193, 193, 193, 0.5);
+    text-decoration:underline;
+    color: rgba(30, 255, 0, 0.9);
 }
 .set-item-center{
 /** アイテムを中央にそろえる */
@@ -63,28 +68,45 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 
 .back{
     font-size: 14px;
-    width: 12vw;
+    width: 20vw;
     height: 4vh;
     text-decoration: none;
     display: grid;
     place-items: center;
     color: aliceblue;
+    transition: 0.5s;
 }
 .back:hover{
-    background-color: rgba(193, 193, 193, 0.3);
+    text-decoration:underline;
+}
+.back:active{
+    color: rgba(30, 255, 0, 0.9);
 }
 @media screen and (max-width:768px){
     .header-root{
         display: grid;
         grid-template-rows: 40px;
         grid-template-columns: 50% 1fr 1fr 1fr;
-        height: 3.5vh;
+        height: 4vh;
         background-color: v-bind(mainDarkColor);
     }
     .back{
         font-size: 10px;
-        width: 20vw;
-        height: 3.5vh;
+        width: 30vw;
+        height: 4vh;
+    }
+    .content{
+    font-size: 14px;
+    height: 4vh;
+    text-decoration: none;
+    color: aliceblue;
+    transition: 0.5s;
+}
+    .content:hover{
+        background-color: rgba(193, 193, 193, 0.2);
+    }
+    .content:active{
+        background-color: rgba(193, 193, 193, 0.5);
     }
 }
 

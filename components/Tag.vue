@@ -27,6 +27,6 @@ const Props = withDefaults(defineProps<Tag>(), {
     visibility: visible;
     position: relative;
     color: white;
-    font-family: 'Courier New';
+    font-family: 'SawarabiMincho';
 }
 </style>

@@ -20,53 +20,64 @@ const { structuredMenu } = useHtmlParser(contents)
 const { menu, transition, transitionTimeoutMs, openMenu, closeMenu } = useMenu(contents)
 const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 
+/** header */
+useHead(
+    {
+      titleTemplate: `%s - ${contents.value?.title}`,
+      bodyAttrs: {
+        class: 'rtl'
+      }
+    }
+)
+const trans = ref(true)
+setTimeout(() => { trans.value = false }, 2500);
 </script>
 
 <template>
+    <div class="transition" :class="{'anim-trans': trans }"></div>
     <div class="root">
         <div class="title">
             {{contents?.title}}
         </div>
-        <div class="content">
-            <!-- 折りたたみ状態のmenu -->
-            <div class="menu">
-                <template v-if="!menu.isOpen">
-                    <div @click.stop="openMenu" class="menu-btn">
-                        <img src="@/assets/img/menu_open.svg" alt="menu" class="menu-btn-img">
-                    </div>
-                </template>
-            </div>
-            <!-- 本文 -->
-            <div v-html="contents?.content" class="article"></div>
-
-            <!-- overlay -->
-            <div v-if="menu.isOpen"  @click="closeMenu" class="shadow" :class="{'fadeout':transition}"></div>
-
-            <!-- menu bar -->
-            <div v-if="menu.isOpen" class="menu-bar menu-bar-transition" :class="{ 'fadeOutToRight' : transition }">
-                <div @click.stop="closeMenu" class="close-menu-btn-row">
-                    <div class="close-menu-btn">
-                        x
-                    </div>
+        <div class="main">
+            <div class="content">
+                    <!-- 折りたたみ状態のmenu -->
+                <div @click.stop="openMenu" class="menu">
+                    <template v-if="!menu.isOpen">
+                        <div @click.stop="openMenu" class="menu-btn">
+                            <img src="@/assets/img/menu_open.svg" alt="menu" class="menu-btn-img">
+                        </div>
+                    </template>
                 </div>
-                <li v-for="h1 in structuredMenu" class="menu-bar-item">
-                    <a :href="$route.path+`#${h1.id}`" @click.stop="closeMenu">
-                    {{ h1.text }}
-                    </a>
-                    <li v-for="h2 in h1.child" class="menu-bar-item">
-                        <a :href="$route.path+`#${h2.id}`" @click.stop="closeMenu">
-                            {{ h2.text }}
+                <!-- 本文 -->
+                <div v-html="contents?.content" class="article"></div>
+                <!-- overlay -->
+                <div v-if="menu.isOpen"  @click="closeMenu" class="shadow" :class="{'fadeout':transition}"></div>
+                <!-- menu bar -->
+                <div v-if="menu.isOpen" class="menu-bar menu-bar-transition" :class="{ 'fadeOutToRight' : transition }">
+                    <div @click.stop="closeMenu" class="close-menu-btn-row">
+                        <div class="close-menu-btn">
+                            x
+                        </div>
+                    </div>
+                    <li v-for="h1 in structuredMenu" class="menu-bar-item">
+                        <a :href="$route.path+`#${h1.id}`" @click.stop="closeMenu">
+                            {{ h1.text }}
                         </a>
-                        <li v-for="h3 in h2.child" class="menu-bar-item">
-                            {{ h3.text }}
+                        <li v-for="h2 in h1.child" class="menu-bar-item">
+                            <a :href="$route.path+`#${h2.id}`" @click.stop="closeMenu">
+                                {{ h2.text }}
+                            </a>
+                            <li v-for="h3 in h2.child" class="menu-bar-item">
+                                {{ h3.text }}
+                            </li>
                         </li>
                     </li>
-                </li>
+                </div>
             </div>
         </div>
         <div class="dummy-margin"></div>
     </div>
-    
 </template>
 
 <style scoped>
@@ -82,6 +93,9 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
     display: grid;
     /* place-items: 縦 横;  */
     place-items: center start;
+    white-space: pre;
+    overflow-x: scroll;
+    box-shadow: 2px 2px 2px 2px  rgba(83, 235, 60, 0.224);
 }
 .content {
   display: grid;
@@ -90,12 +104,16 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
   position: relative
 }
 .menu{
-    background-color: #245941;
+    background-color: rgba(36, 89, 65, 1);
+    width: 5vw;
+    box-shadow: 2px 1px 2px  rgba(83, 235, 60, 0.224);
 }
 .menu-btn{
-    height: 7vh;
+    /* height: 100vh; */
+    width: 5vw;
     display: grid;
-    place-content: center;
+    place-content:start center;
+    transition: 0.5s;
 }
 
 /* 左から右にフェードイン */
@@ -137,12 +155,18 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
     display: grid;
     place-content: center;
 }
-.menu-btn:hover{
+.menu:hover{
+    background-color: rgba(36, 89, 65, 0.9);
+}
+.menu:active{
+    background-color: rgba(36, 89, 65, 0.8);
+}
+/* .menu-btn:hover{
     background-color: rgba(175, 175, 175, 0.2);
 }
 .menu-btn:active{
     background-color: rgba(175, 175, 175, 0.5);
-}
+} */
 .menu-bar{
     width: 40vw;
     /* height: 100vh; */
@@ -151,17 +175,20 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
     /*
         親要素が position: relative; (or fixed) であれば
         子要素がposition: absolute;のときに 親要素の左上が起点となる
+        fixedではscrollしても同じ位置に固定される
+
     */
-    position: absolute;
+    position: fixed;
     top: 0vh;
     left: 0px;
-    z-index: 100;
+    z-index: 1;
     transition: all 0.2s 1s ease-in-out;
 }
 .shadow{
-    position: absolute;
+    position: fixed;
     left: 0; top: 0;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     background: rgba(100, 100, 100, .8);
     animation: fadein v-bind(animationDuration) ease 0s 1 forwards;
 }
@@ -187,6 +214,7 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
     padding: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    transition: 0.5s;
 }
 .close-menu-btn:hover{
     background-color: rgba(217, 217, 217, 0.2);
@@ -200,6 +228,7 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 .article{
     padding: 2vw;
     margin: 2vw;
+    margin-left: 7vw;
 }
 /** ダミー要素 */
 .dummy-margin{
@@ -254,9 +283,13 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 .root :deep(a){
     font-size: 14px;
     margin-top: 1em;
-    color: yellow;
+    transition: 0.5s;
+    color: white;
 }
 .root :deep(a:hover){
+    color: yellow;
+}
+.root :deep(a:active){
     color: rgba(30, 255, 0, 0.9);
 }
 .root :deep(img){
@@ -269,12 +302,13 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 @media screen and (max-width:768px){
     .title{
         background-color: #245941;
-        width: 100vw;
         height: 4vh;
-        font-size: 1.1rem;
+        font-size: 1rem;
         display: grid;
         /* place-items: 縦 横;  */
         place-items: center start;
+        white-space: pre;
+        overflow-x: scroll;
     }
     .content {
         display: grid;
@@ -283,7 +317,6 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
         position: relative
     }
     .menu-btn{
-        height: 7vh;
         display: grid;
         place-content: center;
     }
@@ -298,7 +331,7 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
         position: absolute;
         top: 0vh;
         left: 0px;
-        z-index: 100;
+        z-index: 1;
     }
     .article{
         padding: 3vw;
@@ -353,9 +386,7 @@ const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
         font-size: 10px;
         margin-top: 1em;
         color: yellow;
-    }
-    .root :deep(a:hover){
-        color: rgba(30, 255, 0, 0.9);
+        transition: 0.5s;
     }
     .root :deep(img){
         width: 90%;

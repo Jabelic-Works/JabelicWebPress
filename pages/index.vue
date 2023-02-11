@@ -1,5 +1,18 @@
-<script src=""></script>
+<script setup lang="ts">
+useHead(
+    {
+      titleTemplate: '%s',
+      bodyAttrs: {
+        class: 'rtl'
+      }
+    }
+)
+const trans = ref(true)
+setTimeout(() => {trans.value = false}, 2500);
+</script>
+
 <template>
+    <div class="transition" :class="{'anim-trans': trans }"></div>
     <div class="root">
         <div class="sub-header">
             <h1>Jabelic Web Press</h1>
@@ -8,8 +21,8 @@
         <Contents/>
     </div>
 </template>
-<style scoped>
 
+<style scoped>
 .sub-header{
     padding-left: 3%;
     padding-top: 3%;
@@ -33,4 +46,5 @@ h3{
         padding-top: 3%;
     }
 }
+
 </style>
