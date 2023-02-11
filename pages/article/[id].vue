@@ -21,14 +21,12 @@ const { menu, transition, transitionTimeoutMs, openMenu, closeMenu } = useMenu(c
 const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 
 /** header */
-useHead(
-    {
+useHead({
       titleTemplate: `%s - ${contents.value?.title}`,
       bodyAttrs: {
         class: 'rtl'
       }
-    }
-)
+    })
 const trans = ref(true)
 setTimeout(() => { trans.value = false }, 2500);
 </script>
@@ -57,7 +55,7 @@ setTimeout(() => { trans.value = false }, 2500);
                 <div v-if="menu.isOpen" class="menu-bar menu-bar-transition" :class="{ 'fadeOutToRight' : transition }">
                     <div @click.stop="closeMenu" class="close-menu-btn-row">
                         <div class="close-menu-btn">
-                            x
+                            <img src="@/assets/img/close-btn.svg" alt="close-btn">
                         </div>
                     </div>
                     <li v-for="h1 in structuredMenu" class="menu-bar-item">
@@ -87,7 +85,7 @@ setTimeout(() => { trans.value = false }, 2500);
 }
 .title{
     background-color: #245941;
-    height: 5vh;
+    height: 4vh;
     font-size: 1.8rem;
     padding-left: 1rem;
     display: grid;
@@ -110,11 +108,11 @@ setTimeout(() => { trans.value = false }, 2500);
 }
 .menu-btn{
     /* height: 100vh; */
-    width: 5vw;
     display: grid;
-    place-content:start center;
+    place-content: center;
     transition: 0.5s;
 }
+
 
 /* 左から右にフェードイン */
 .menu-bar-transition{
@@ -128,10 +126,9 @@ setTimeout(() => { trans.value = false }, 2500);
     opacity: 0;
   transform: translateX(-100px);
   }
-
   to {
     opacity: 1;
-  transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
@@ -152,7 +149,6 @@ setTimeout(() => { trans.value = false }, 2500);
 
 .menu-btn-img{
     height: 5vh;
-    display: grid;
     place-content: center;
 }
 .menu:hover{
@@ -161,16 +157,10 @@ setTimeout(() => { trans.value = false }, 2500);
 .menu:active{
     background-color: rgba(36, 89, 65, 0.8);
 }
-/* .menu-btn:hover{
-    background-color: rgba(175, 175, 175, 0.2);
-}
-.menu-btn:active{
-    background-color: rgba(175, 175, 175, 0.5);
-} */
+
 .menu-bar{
     width: 40vw;
-    /* height: 100vh; */
-    height: 100%;
+    height: 120%;
     background-color: #245941;
     /*
         親要素が position: relative; (or fixed) であれば
@@ -212,8 +202,9 @@ setTimeout(() => { trans.value = false }, 2500);
     place-content: center end;
 }
 .close-menu-btn{
-    padding: 1rem;
+    padding: 0.5rem;
     padding-left: 2rem;
+    padding-bottom: 2rem;
     padding-right: 2rem;
     transition: 0.5s;
 }
@@ -303,7 +294,7 @@ setTimeout(() => { trans.value = false }, 2500);
 @media screen and (max-width:768px){
     .title{
         background-color: #245941;
-        height: 4vh;
+        height: 5vh;
         font-size: 1rem;
         display: grid;
         /* place-items: 縦 横;  */
@@ -316,9 +307,16 @@ setTimeout(() => { trans.value = false }, 2500);
         grid-template-columns: 8vw 92vw;
         padding: 0%;
     }
+    .menu{
+        width: 10vw;
+    }
     .menu-btn{
-        display: grid;
         place-content: center;
+    }
+    .menu-btn-img{
+        /* height: 10vh; */
+        display: grid;
+        place-content: start center;
     }
     .menu-bar{
         width: 60vw;
@@ -389,5 +387,8 @@ setTimeout(() => { trans.value = false }, 2500);
         margin: auto;
         margin-top: 1em;
     }
+}
+img{
+    margin: 0px;
 }
 </style>

@@ -87,21 +87,21 @@ const backTo = ()=>router.back()
         display: grid;
         grid-template-rows: 40px;
         grid-template-columns: 50% 1fr 1fr 1fr;
-        height: 4vh;
+        height: 6vh;
         background-color: v-bind(mainDarkColor);
     }
     .back{
         font-size: 10px;
         width: 15vw;
-        height: 4vh;
+        height: 6vh;
     }
     .content{
-    font-size: 14px;
-    height: 4vh;
-    text-decoration: none;
-    color: aliceblue;
-    transition: 0.5s;
-}
+        font-size: 14px;
+        height: 6vh;
+        text-decoration: none;
+        color: aliceblue;
+        transition: 0.5s;
+    }
     .content:hover{
         background-color: rgba(193, 193, 193, 0.2);
     }
