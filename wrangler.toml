@@ -1,0 +1,16 @@
+name = "webpress"
+type = "javascript"
+account_id = "1ed8242d87edf92a321a05060720083a"
+workers_dev = true
+route = ""
+zone_id = ""
+
+[site]
+bucket = ".output/public"
+entry-point = ".output"
+
+[build]
+command = "NITRO_PRESET=cloudflare npm run build"
+
+[build.upload]
+format = "service-worker"
