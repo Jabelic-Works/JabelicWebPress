@@ -18,8 +18,12 @@ const profiles = ref({
 const appConfig = useAppConfig()
 const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 const mainColor = ref(appConfig.theme.colors.main)
+
+const trans = ref(true)
+setTimeout(() => { trans.value = false }, 2500);
 </script>
 <template>
+    <div class="transition" :class="{'anim-trans': trans }"></div>
     <div class="root">
         <h1>profile</h1>
         <div class="contents">
@@ -35,13 +39,14 @@ const mainColor = ref(appConfig.theme.colors.main)
 <style scoped>
 .root{
     background-color: black;
-    font-family: 'Tauri';
+    font-family: 'SawarabiMincho';
 }
 h1{
     padding-left: 3%;
     padding-top: 3%;
     font-size: 20px;
 }
+
 .profile-card{
     background-color: black;
     padding: 1%;
@@ -49,11 +54,22 @@ h1{
     box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, .2);
     border: solid 0.1rem v-bind(mainDarkColor);
     border-radius: 0.5rem;
+    transition: 0.5s;
+    color: white;
+}
+.profile-card:active{
+    color: rgba(30, 255, 0, 0.9);
 }
 .profile-card:hover, .profile-card:active{
     box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, .5);
     border: solid 0.1rem v-bind(mainColor);
     border-radius: 0.5rem;
+}
+.profile-card:hover{
+   color: yellow;
+}
+.profile-card:active{
+    color: rgba(30, 255, 0, 0.9);
 }
 .contents{
     padding-top: 3%;
