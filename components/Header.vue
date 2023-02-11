@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { Locales } from '~~/model/locale';
+import { useLocaleStore } from '~~/store/locale';
+
+
 type Contents = Array<{title: string, link: string, target: '_blank' | null}>
 const contents = ref<Contents>([
     {
@@ -17,11 +21,17 @@ const contents = ref<Contents>([
         target: '_blank'
     }
 ])
-
 const appConfig = useAppConfig()
 const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 const router = useRouter()
 const backTo = ()=>router.back()
+const locale = ref<Locales>('en')
+const store = useLocaleStore()
+watch(locale,(arg)=>{ 
+    store.switchLang(arg)
+    console.debug(arg)
+})
+
 </script>
 
 <template>
@@ -30,6 +40,13 @@ const backTo = ()=>router.back()
             <NuxtLink v-if="$route.path !== '/'" class="back" @click="backTo()">
                 ←戻る
             </NuxtLink>
+            <form>
+            <label for="locale-select">language: </label>
+            <select id="locale-select" v-model="locale">
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+            </select>
+            </form>
         </span>
         <NuxtLink v-for="content in contents" class="content set-item-center" :to="content.link" :target="content.target" rel="noopener">
             <span class="title">{{ content.title }}</span>
