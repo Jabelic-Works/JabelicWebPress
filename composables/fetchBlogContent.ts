@@ -8,9 +8,6 @@ export const useFetchBlogContent = async () => {
     const config:RuntimeConfig = useRuntimeConfig()
     const store = useLocaleStore()
     const route = useRoute()
-    // const params = {
-    //     fields: "id,title,main_image,updatedAt,author.name"
-    // }
     const { data: contents, pending, error, refresh } = await useFetch<Article>(
         store.getLocale === locales.ja ?
         "https://jabelicwebpress.microcms.io/api/v1/blogs"  +`/${route.params.id}` :
