@@ -1,4 +1,6 @@
-<script setup lang="ts">
+<script setup lang="ts">import { titles } from '~~/i18n/constant';
+import { useLocaleStore } from '~~/store/locale';
+
 useHead(
     {
       titleTemplate: '%s',
@@ -9,14 +11,16 @@ useHead(
 )
 const trans = ref(true)
 setTimeout(() => {trans.value = false}, 2500);
+const store = useLocaleStore()
+const _titles = computed(()=>titles[store.getLocale])
 </script>
 
 <template>
     <div class="transition" :class="{'anim-trans': trans }"></div>
     <div class="root">
         <div class="sub-header">
-            <h1>Jabelic Web Press</h1>
-            <h2>小さく書いて大きく育てる</h2>
+            <h1>{{ _titles.title }}</h1>
+            <h2>{{ _titles.subTitle }}</h2>
         </div>
         <Contents/>
     </div>

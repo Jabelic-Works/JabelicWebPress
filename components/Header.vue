@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { locales, Locales } from '~~/model/locale';
+import { locales, Locales } from '~~/i18n/locale';
 import { useLocaleStore } from '~~/store/locale';
 const router = useRouter()
 
