@@ -18,3 +18,10 @@ export const titles:Titles = {
         subTitle : "小さく書いて大きく育てる"
     }
 }
+
+export const switchLangLabels: {
+    [key in Locales]: string
+} = {
+    ja: "日本語",
+    en: "English"
+}

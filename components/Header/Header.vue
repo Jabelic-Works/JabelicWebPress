@@ -19,27 +19,18 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 const backTo = ()=>router.back()
 
 /** i18n */
-const store = useLocaleStore()
-const locale = ref<Locales>(store.getLocale)
 const route = useRoute()
-watch(locale,(arg)=>{ store.switchLang(arg) })
 const isShowLangSwitcher = computed(()=>!route.path.includes('article'))
 </script>
 
 <template>
     <div class="header-root">
         <span class="left">
-            <NuxtLink v-if="$route.path !== '/'" class="back" @click="backTo()">
+            <NuxtLink v-if="$route.path !== '/'" class="back" @click="$event=>backTo()">
                 ←戻る
             </NuxtLink>
             <div v-if="isShowLangSwitcher" class="lang-switch">
-                <form class="switch-form">
-                    <label for="locale-select">language: </label>
-                    <select id="locale-select" v-model="locale">
-                        <option value="en">English</option>
-                        <option value="ja">日本語</option>
-                    </select>
-                </form>
+                <SelectLang/>
             </div>
         </span>
         <NuxtLink v-for="content in contents" class="content set-item-center" :to="content.link" :target="content.target" rel="noopener">
