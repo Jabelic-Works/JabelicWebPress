@@ -25,5 +25,12 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/png", href: "/icon-16x16.png" }, // これを追記する
       ],
     },
-  }
+  },
+  components: [
+    /** components内のディレクトリを無関係として、ファイル名でauto importさせる設定 */
+    {
+      path: "~/components",
+      pathPrefix: false
+    }
+  ]
 })
