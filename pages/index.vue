@@ -19,8 +19,7 @@ const _titles = computed(()=>titles[store.getLocale])
     <div class="transition" :class="{'anim-trans': trans }"></div>
     <div class="root">
         <div class="sub-header">
-            <h1>{{ _titles.title }}</h1>
-            <h2>{{ _titles.subTitle }}</h2>
+            <h1>{{ _titles.subTitle }}</h1>
         </div>
         <Contents/>
     </div>
@@ -33,7 +32,7 @@ const _titles = computed(()=>titles[store.getLocale])
     padding-bottom: 3%;
 }
 h1{
-    font-size: 40px;
+    font-size: 28px;
     padding-top: 1%;
 }
 h3{

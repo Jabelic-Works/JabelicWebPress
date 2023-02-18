@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import { RuntimeConfig } from '@nuxt/schema';
-import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
-import { locales } from '~~/i18n/locale';
 import { useLocaleStore } from '~~/store/locale';
 
 
-const config:RuntimeConfig = useRuntimeConfig()
-
-const store = useLocaleStore()
-
 const contents = await useFetchBlogList()
 
+const store = useLocaleStore()
 watch(()=>store.getLocale, async (arg)=>{
     const _contents = await useFetchBlogList()
     contents.value = _contents.value

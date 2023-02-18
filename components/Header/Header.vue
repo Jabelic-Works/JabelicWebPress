@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { titles } from '~~/i18n/constant';
 import { locales, Locales } from '~~/i18n/locale';
 import { useLocaleStore } from '~~/store/locale';
 const router = useRouter()
@@ -18,16 +19,21 @@ const mainDarkColor = ref(appConfig.theme.colors.mainDark)
 /** 戻るボタン */
 const backTo = ()=>router.back()
 
+
 /** i18n */
 const route = useRoute()
 const isShowLangSwitcher = computed(()=>!route.path.includes('article'))
+
+
+const headerHeight = ref("5vh")
+const mobileheaderHeight = ref("7vh")
 </script>
 
 <template>
     <div class="header-root">
         <span class="left">
-            <NuxtLink v-if="$route.path !== '/'" class="back" @click="$event=>backTo()">
-                ←戻る
+            <NuxtLink class="header-title" @click="$event=>backTo()">
+                {{ titles.ja.title }}
             </NuxtLink>
             <div v-if="isShowLangSwitcher" class="lang-switch">
                 <SelectLang/>
@@ -43,14 +49,18 @@ const isShowLangSwitcher = computed(()=>!route.path.includes('article'))
 .header-root{
     display: grid;
     grid-template-rows: 40px;
-    grid-template-columns: 75% 1fr 1fr 1fr;
-    height: 4vh;
+    grid-template-columns: 70% 1fr 1fr 1fr;
+    height: v-bind(headerHeight);
     background-color: v-bind(mainDarkColor);
-    /* position: fixed; */
 }
 .left{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr auto 1fr 1fr 1fr;
+    grid-template-columns: 1fr auto 10fr;
+}
+.home-icon{
+    width: auto;
+    height: 100%;
 }
 .lang-switch{
     display: flex;
@@ -63,7 +73,7 @@ const isShowLangSwitcher = computed(()=>!route.path.includes('article'))
 
 .content{
     font-size: 14px;
-    height: 4vh;
+    height: v-bind(headerHeight);
     text-decoration: none;
     color: aliceblue;
     transition: 0.5s;
@@ -81,20 +91,22 @@ const isShowLangSwitcher = computed(()=>!route.path.includes('article'))
     place-items: center;
 }
 
-.back{
-    font-size: 14px;
-    width: 10vw;
-    height: 4vh;
+.header-title{
+    font-size: 18px;
+    width: 12vw;
+    max-width: 25vw;
+    min-width: 20vw;
+    height: v-bind(headerHeight);
     text-decoration: none;
     display: grid;
     place-items: center;
     color: aliceblue;
     transition: 0.5s;
 }
-.back:hover{
+.header-title:hover{
     text-decoration:underline;
 }
-.back:active{
+.header-title:active{
     color: rgba(30, 255, 0, 0.9);
 }
 @media screen and (max-width:768px){
@@ -102,17 +114,18 @@ const isShowLangSwitcher = computed(()=>!route.path.includes('article'))
         display: grid;
         grid-template-rows: 40px;
         grid-template-columns: 50% 1fr 1fr 1fr;
-        height: 6vh;
+        height: v-bind(mobileheaderHeight);
         background-color: v-bind(mainDarkColor);
     }
-    .back{
-        font-size: 10px;
+    .header-title{
+        font-size: 12px;
         width: 15vw;
+        max-width: 20vw;
         height: 6vh;
     }
     .content{
         font-size: 14px;
-        height: 6vh;
+        height: v-bind(mobileheaderHeight);
         text-decoration: none;
         color: aliceblue;
         transition: 0.5s;
