@@ -3,6 +3,7 @@
   "scripts": {
     "build": "nuxt build",
     "publish": "NITRO_PRESET=cloudflare npm run build && wrangler publish",
+    "devTest": "NITRO_PRESET=cloudflare npm run build && wrangler dev",
     "dev": "nuxt dev --dotenv .env.dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
