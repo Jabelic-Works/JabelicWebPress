@@ -4,7 +4,12 @@ import { RuntimeConfig } from '@nuxt/schema';
 import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
 import { Article } from "~~/adapter/article";
 
-export const useFetchBlogContent = async () => {
+/**
+ * 
+ * @param isObject json形式でcontentsをfetchする場合はtrue, HTML形式ならfalse
+ * @returns contents
+ */
+export const useFetchBlogContent = async (isObject?: boolean) => {
     const config:RuntimeConfig = useRuntimeConfig()
     const store = useLocaleStore()
     const route = useRoute()
@@ -13,10 +18,13 @@ export const useFetchBlogContent = async () => {
         "https://jabelicwebpress.microcms.io/api/v1/blogs"  +`/${route.params.id}` :
         "https://jabelicwebpressen.microcms.io/api/v1/blogs" +`/${route.params.id}`,
         {
-        headers:{
-            "X-MICROCMS-API-KEY":
-            store.getLocale === locales.ja ? config.apikey : config.enApikey
-        }
-    })
+            query: {
+                richEditorFormat: isObject ? 'object' : 'html'
+            },
+            headers:{
+                "X-MICROCMS-API-KEY":
+                store.getLocale === locales.ja ? config.apikey : config.enApikey
+            }
+        })
     return contents
 }
