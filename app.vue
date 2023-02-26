@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Header  from '~/src/components/Header/Header.vue'
+import { APP_NAME }from '~~/src/shared/app/global'
+</script>
 <template>
   <div>
     <Html lang="ja">

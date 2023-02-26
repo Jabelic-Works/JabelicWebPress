@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 
 // adapter
 interface Article {
@@ -110,4 +110,4 @@ const mainColor = ref(appConfig.theme.colors.main)
     color: rgba(30, 255, 0, 0.9);
   }
 }
-</style>
+</style> -->

@@ -1,6 +1,7 @@
 <script setup lang="ts">import { titles } from '~~/i18n/constant';
 import { useLocaleStore } from '~~/store/locale';
-
+import { useBlogList } from '../interactors/blogList';
+import Contents from '~/src/components/Contents.vue'
 useHead(
     {
       titleTemplate: '%s',
@@ -13,6 +14,9 @@ const trans = ref(true)
 setTimeout(() => {trans.value = false}, 2500);
 const store = useLocaleStore()
 const _titles = computed(()=>titles[store.getLocale])
+
+const f =  await useBlogList()
+
 </script>
 
 <template>

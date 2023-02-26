@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { useLocaleStore } from '~~/store/locale';
 
 
@@ -34,4 +34,4 @@ watch(()=>store.getLocale, async (arg)=>{
     margin-right: 3%;
     margin-top: 3%;
 }
-</style>
+</style> -->

@@ -2,7 +2,7 @@
 <coverage generated="1677424477917" clover="3.2.0">
   <project timestamp="1677424477917" name="All files">
     <metrics statements="43" coveredstatements="37" conditionals="5" coveredconditionals="3" methods="4" coveredmethods="1" elements="52" coveredelements="41" complexity="0" loc="43" ncloc="43" packages="1" files="1" classes="1"/>
-    <file name="fetch.ts" path="/Users/jabelic/dev/JabelicWebPress/src/utils/fetch.ts">
+    <file name="fetch.ts" path="/Users/jabelic/dev/JabelicWebPress/src/shared/fetch.ts">
       <metrics statements="43" coveredstatements="37" conditionals="5" coveredconditionals="3" methods="4" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
