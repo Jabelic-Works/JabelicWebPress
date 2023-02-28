@@ -1,4 +1,4 @@
-import { StructuredMenuItem, TitleAndTag } from "~~/composables/htmlParser"
+import { StructuredMenuItem, TitleAndTag } from "~~/src/shared/composables/htmlParser"
 
 export const formatTitleAndTagToStructuredMenuItem = (arg: TitleAndTag, _child?: any):StructuredMenuItem=>(
     {

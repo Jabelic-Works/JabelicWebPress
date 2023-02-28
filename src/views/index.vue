@@ -1,7 +1,9 @@
-<script setup lang="ts">import { titles } from '~~/i18n/constant';
+<script setup lang="ts">
+import { titles } from '~~/i18n/constant';
 import { useLocaleStore } from '~~/store/locale';
 import { useBlogList } from '../interactors/blogList';
-import Contents from '~/src/shared/components/Contents.vue'
+import HomeContents from '~~/src/shared/components/HomeContents.vue'
+
 useHead(
     {
       titleTemplate: '%s',
@@ -16,12 +18,10 @@ const store = useLocaleStore()
 const _titles = computed(()=>titles[store.getLocale])
 
 
-// FIXME: propsでコンテンツを入れる
 const contents = (await useLazyAsyncData(async ()=>await useBlogList())).data
 watch(()=>store.getLocale, async (arg)=>{
     contents.value = (await useLazyAsyncData(async ()=>await useBlogList())).data.value
 })
-
 </script>
 
 <template>
@@ -30,7 +30,7 @@ watch(()=>store.getLocale, async (arg)=>{
         <div class="sub-header">
             <h1>{{ _titles.subTitle }}</h1>
         </div>
-        <Contents v-if="contents" :contents="contents"/>
+        <HomeContents v-if="contents" :contents="contents"/>
     </div>
 </template>
 

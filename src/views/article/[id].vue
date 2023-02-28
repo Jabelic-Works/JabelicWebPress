@@ -8,7 +8,6 @@ const route = useRoute()
 const store = useLocaleStore()
 
 const contents = await useFetchBlogContent()
-
 watch(()=>store.getLocale, async (arg)=>{
     const _contents = await useFetchBlogContent()
     contents.value = _contents.value
@@ -22,15 +21,20 @@ type ListedMenu  = Array<{
 }>
 const { structuredMenu } = useHtmlParser(contents)
 const { menu, transition, transitionTimeoutMs, openMenu, closeMenu } = useMenu(contents)
-const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
+
+/** extract title */
+const { extractTitle } = useTitleAndDescription()
 
 /** header */
 useHead({
-      titleTemplate: `%s - ${contents.value?.title}`,
-      bodyAttrs: {
+    titleTemplate: `%s - ${contents.value?.title}`,
+    bodyAttrs: {
         class: 'rtl'
-      }
-    })
+    }
+})
+
+/** animation */
+const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 const trans = ref(true)
 setTimeout(() => { trans.value = false }, 2500);
 </script>
@@ -39,7 +43,7 @@ setTimeout(() => { trans.value = false }, 2500);
     <div class="transition" :class="{'anim-trans': trans }"></div>
     <div class="root">
         <div class="title">
-            {{contents?.title}}
+            {{extractTitle(contents?.title ?? "")}}
         </div>
         <div class="main">
             <div class="content">

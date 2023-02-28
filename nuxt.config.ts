@@ -32,5 +32,15 @@ export default defineNuxtConfig({
       path: "/<rootDir>/src/shared/components",
       pathPrefix: false
     }
-  ]
+  ],
+  imports: {
+    dirs: [
+      // Scan top-level modules
+      'src/shared/composables',
+      // ... or scan modules nested one level deep with a specific name and file extension
+      'src/shared/composables/*/index.{ts,js,mjs,mts}',
+      // ... or scan all modules within given directory
+      'src/shared/composables/**'
+    ]
+  }
 })

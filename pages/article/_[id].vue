@@ -19,7 +19,7 @@ type ListedMenu  = Array<{
     id: string|undefined;
     child: Array<ListedMenu>
 }>
-const { structuredMenu } = useHtmlParser(contents)
+
 const { menu, transition, transitionTimeoutMs, openMenu, closeMenu } = useMenu(contents)
 const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
 
