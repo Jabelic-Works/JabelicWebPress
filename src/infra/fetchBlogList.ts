@@ -7,13 +7,9 @@ import { _fetch } from "~~/src/shared/utils/fetch";
 // API, ACL
 
 
-export const fetchBlogList = async ():Promise<MicroCMSListResponse<any>> => {
+export const fetchBlogList = async ():Promise<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: string}>> => {
     const config:RuntimeConfig = useRuntimeConfig()
     const store = useLocaleStore()
-    // FIXME: define fields types(union)
-    const params = {
-        fields: "id,title,main_image,updatedAt,author.name"
-    }
     // FIXME: locale option in argument
     const endpoint = store.getLocale === locales.ja ?
         "https://jabelicwebpress.microcms.io/api/v1/blogs" :
@@ -23,8 +19,11 @@ export const fetchBlogList = async ():Promise<MicroCMSListResponse<any>> => {
             "X-MICROCMS-API-KEY":
             store.getLocale === locales.ja ? config.apikey : config.enApikey
         },
-        params
     }
-    const res = await _fetch<MicroCMSListResponse<any>>(endpoint, options)
+    // FIXME: define fields types(union)
+    const params = {
+        fields: "id,title,main_image,updatedAt,author.name,category"
+    }
+    const res = await _fetch<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: string}>>({url: endpoint, params, options})
     return res
 }

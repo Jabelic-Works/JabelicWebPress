@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RuntimeConfig } from '@nuxt/schema';
-import { Article } from '@/adapter/article';
 import { useLocaleStore } from '~~/store/locale';
 
 const config:RuntimeConfig = useRuntimeConfig()

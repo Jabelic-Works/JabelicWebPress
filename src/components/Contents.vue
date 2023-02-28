@@ -1,28 +1,39 @@
 <script setup lang="ts">
 import { useLocaleStore } from '~~/store/locale';
 import ArticleCard from '~/src/components/ArticleCard.vue'
+import { useBlogList } from '../interactors/blogList';
+import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
+import { ContentsCards } from '../useCases/blogList';
 
-const contents = await useFetchBlogList()
+type Props = {
+    contents: ContentsCards['contents']
+}
 
-const store = useLocaleStore()
-watch(()=>store.getLocale, async (arg)=>{
-    const _contents = await useFetchBlogList()
-    contents.value = _contents.value
-})
+// https://github.com/vuejs/core/issues/4294
+const props = withDefaults(defineProps<Props>(), {
+    contents: (): ContentsCards['contents']=>[{
+        title: 'title',
+        id: '1',
+        description: 'description',
+        tag: ['a', 'b'],
+        updatedAt: ''
+    }]
+});
+
+
 </script>
 
 <template>
     <div class="root">
-        <template v-if="contents">
-            <div v-for="article in contents.contents" class="article">
+        <template v-if="props.contents">
+            <div v-for="article in props.contents" class="article">
                 <ArticleCard
-                    :jp-title="article.title"
-                    :en-title="article.title"
-                    :id="article.id"
-                    :description="article.content"
+                    :title="article.title"
+                    :id="article.id ?? 'id'"
+                    :description="article.description"
                     :tags="null"
                     :to="`article/${article.id}`"
-                />
+                    />
             </div>
         </template>
     </div>

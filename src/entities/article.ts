@@ -1,11 +1,7 @@
-export type Article={
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    publishedAt: string,
-    revisedAt: string,
-    title: string,
-    content: string,
-    eyecatch: string,
-    category: string
+export interface Article {
+    title: string;
+    description: string;
+    tags: Array<string> | null;
+    to: string;
+    id: string|number
 }

@@ -15,7 +15,12 @@ setTimeout(() => {trans.value = false}, 2500);
 const store = useLocaleStore()
 const _titles = computed(()=>titles[store.getLocale])
 
-const f =  await useBlogList()
+
+// FIXME: propsでコンテンツを入れる
+const contents = (await useLazyAsyncData(async ()=>await useBlogList())).data
+watch(()=>store.getLocale, async (arg)=>{
+    contents.value = (await useLazyAsyncData(async ()=>await useBlogList())).data.value
+})
 
 </script>
 
@@ -25,7 +30,7 @@ const f =  await useBlogList()
         <div class="sub-header">
             <h1>{{ _titles.subTitle }}</h1>
         </div>
-        <Contents/>
+        <Contents v-if="contents" :contents="contents"/>
     </div>
 </template>
 

@@ -10,7 +10,8 @@ type Options = {
     body?: string
 }
 
-export const _fetch = async<T>(url: string, options?: Options): Promise<T>=>{
+export const _fetch = async<T>({url, params, options}: {url: string, params?: {[key in string]: string}, options?: Options}): Promise<T>=>{
+    const queryParameter =  params ? (url+=`?${Object.keys(params)[0]=params[Object.keys(params)[0]]}`) : ''
     const res = await fetch(url, options).then<T>(res => res.json());
     return res
 }
