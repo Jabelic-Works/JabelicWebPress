@@ -1,18 +1,17 @@
-<!-- <script setup lang="ts">
+<script setup lang="ts">
+import Tag from './Tag.vue'
 
-// adapter
 interface Article {
-  enTitle: string;
-  jpTitle: string;
-  description: string;
-  tags: Array<string> | null;
-  to: string;
-  id: string
+    title: string;
+    description: string;
+    tags: Array<string> | null;
+    to: string;
+    id: string|number
 }
+// NOTE: importした型をgenericsに当てられない https://github.com/vuejs/core/issues/4294
 const Props = withDefaults(defineProps<Article>(), {
-  enTitle: "default",
-  jpTitle: "デフォルト",
-  description: "説明説明説明説明説明説明",
+  title: "default",
+  description: '',
   tags: null,
   to: "/",
   id: ""
@@ -26,7 +25,7 @@ const mainColor = ref(appConfig.theme.colors.main)
     <NuxtLink :to="Props.to">
         <section class="card">
             <div class="card-content">
-                <h1 class="card-title">{{ Props.jpTitle }}</h1>
+                <h1 class="card-title">{{ Props.title }}</h1>
                 <p class="card-text">{{ Props.description }}</p>
             </div>
             <div v-if="Props.tags" class="card-tags">
@@ -110,4 +109,4 @@ const mainColor = ref(appConfig.theme.colors.main)
     color: rgba(30, 255, 0, 0.9);
   }
 }
-</style> -->
+</style>

@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   components: [
     /** components内のディレクトリを無関係として、ファイル名でauto importさせる設定 */
     {
-      path: "~/components",
+      path: "/<rootDir>/src/shared/components",
       pathPrefix: false
     }
   ]

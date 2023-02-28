@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { useLocaleStore } from '~~/store/locale';
-import ArticleCard from '~/src/components/ArticleCard.vue'
-import { useBlogList } from '../interactors/blogList';
-import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
-import { ContentsCards } from '../useCases/blogList';
+import ArticleCard from '~/src/shared/components/ArticleCard.vue'
+import { ContentsCards } from '~/src/useCases/blogList';
 
 type Props = {
     contents: ContentsCards['contents']

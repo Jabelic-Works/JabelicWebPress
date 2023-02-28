@@ -1,7 +1,7 @@
 <script setup lang="ts">import { titles } from '~~/i18n/constant';
 import { useLocaleStore } from '~~/store/locale';
 import { useBlogList } from '../interactors/blogList';
-import Contents from '~/src/components/Contents.vue'
+import Contents from '~/src/shared/components/Contents.vue'
 useHead(
     {
       titleTemplate: '%s',

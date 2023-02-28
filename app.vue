@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Header  from '~/src/components/Header/Header.vue'
+import Header  from '~/src/shared/components/Header/Header.vue'
 import { APP_NAME }from '~~/src/shared/app/global'
 </script>
 <template>
