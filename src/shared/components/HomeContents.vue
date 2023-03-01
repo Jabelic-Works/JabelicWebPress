@@ -25,12 +25,19 @@ const props = withDefaults(defineProps<Props>(), {
         <template v-if="props.contents">
             <div v-for="article in props.contents" class="article">
                 <ArticleCard
-                    :title="article.title"
+                    :contents="{
+                        title: article.title,
+                        id: article.id,
+                        description: article.description,
+                        tags: null,
+                        to: `article/${article.id}`
+                    }"
+                    />
+                    <!-- :title="article.title"
                     :id="article.id ?? 'id'"
                     :description="article.description"
                     :tags="null"
-                    :to="`article/${article.id}`"
-                    />
+                    :to="`article/${article.id}`" -->
             </div>
         </template>
     </div>

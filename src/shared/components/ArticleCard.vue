@@ -1,20 +1,19 @@
 <script setup lang="ts">
+import { Article } from '~~/src/entities/article';
 import Tag from './Tag.vue'
 
-interface Article {
-    title: string;
-    description: string;
-    tags: Array<string> | null;
-    to: string;
-    id: string|number
+interface Props {
+  contents: Article
 }
-// NOTE: importした型をgenericsに当てられない https://github.com/vuejs/core/issues/4294
-const Props = withDefaults(defineProps<Article>(), {
-  title: "default",
-  description: '',
-  tags: null,
-  to: "/",
-  id: ""
+// NOTE: importした型を直接genericsに当てられない https://github.com/vuejs/core/issues/4294
+const props = withDefaults(defineProps<Props>(), {
+  contents: ()=>({
+    title: "default",
+    description: '',
+    tags: null,
+    to: "/",
+    id: ""
+  })
 });
 const appConfig = useAppConfig()
 const mainDarkColor = ref(appConfig.theme.colors.mainDark)
@@ -22,14 +21,14 @@ const mainColor = ref(appConfig.theme.colors.main)
 </script>
 
 <template>
-    <NuxtLink :to="Props.to">
+    <NuxtLink :to="props.contents.to">
         <section class="card">
             <div class="card-content">
-                <h1 class="card-title">{{ Props.title }}</h1>
-                <p class="card-text">{{ Props.description }}</p>
+                <h1 class="card-title">{{ props.contents.title }}</h1>
+                <p class="card-text">{{ props.contents.description }}</p>
             </div>
-            <div v-if="Props.tags" class="card-tags">
-              <span v-for="tag in Props.tags" class="card-tag">
+            <div v-if="props.contents.tags" class="card-tags">
+              <span v-for="tag in props.contents.tags" class="card-tag">
                 <Tag :title="tag"/>
               </span>
             </div>
