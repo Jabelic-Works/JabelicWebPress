@@ -1,6 +1,6 @@
 import { Ref } from "@vue/runtime-dom";
 import { Article } from "~~/src/entities/article";
-import { getStructuredMenu } from "~~/model/htmlParser";
+import { getStructuredMenu } from "~~/src/shared/utils/htmlParser";
 
 
 export type TitleTag = "H1" | "H2" | "H3" //| "H4"
