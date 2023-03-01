@@ -1,6 +1,5 @@
 <script setup lang="ts">import { Tag } from '~~/src/entities/tag';
 
-// entity
 interface Props { 
     tag: Tag
 }

@@ -1,4 +1,4 @@
-export interface Article {
+export interface ArticleCard {
     title: string;
     description: string;
     tags: Array<{title: string}> | null;

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Article } from '~~/src/entities/article';
+import { ArticleCard } from '~~/src/entities/article';
 import Tag from './Tag.vue'
 
 interface Props {
-  contents: Article
+  contents: ArticleCard
 }
 // NOTE: importした型を直接genericsに当てられない https://github.com/vuejs/core/issues/4294
 const props = withDefaults(defineProps<Props>(), {

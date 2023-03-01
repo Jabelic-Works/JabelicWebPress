@@ -5,7 +5,7 @@ export interface ContentsCards {
         title: string
         id: string | number 
         description: string
-        tags: Array<Tag>
+        tags: Array<Tag>|null
         updatedAt: string
     }>
 }
