@@ -1,4 +1,4 @@
-import { locales } from "~~/i18n/locale"
+import { locales } from "~~/src/shared/i18n/locale"
 import { useLocaleStore } from "~~/store/locale"
 import { RuntimeConfig } from '@nuxt/schema';
 import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
@@ -15,8 +15,8 @@ export const useFetchBlogContent = async (isObject?: boolean) => {
     const route = useRoute()
     const { data: contents, pending, error, refresh } = await useFetch<Article>(
         store.getLocale === locales.ja ?
-        "https://jabelicwebpress.microcms.io/api/v1/blogs"  +`/${route.params.id}` :
-        "https://jabelicwebpressen.microcms.io/api/v1/blogs" +`/${route.params.id}`,
+        config.apiEndpoint +`/${route.params.id}` :
+        config.enApiEndpoint +`/${route.params.id}`,
         {
             query: {
                 richEditorFormat: isObject ? 'object' : 'html'

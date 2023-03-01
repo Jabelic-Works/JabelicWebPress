@@ -1,4 +1,4 @@
-import { locales } from "~~/i18n/locale"
+import { locales } from "~~/src/shared/i18n/locale"
 import { useLocaleStore } from "~~/store/locale"
 import { RuntimeConfig } from '@nuxt/schema';
 import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
@@ -19,8 +19,8 @@ export const fetchBlogList = async ():Promise<MicroCMSListResponse<{id: string, 
     const store = useLocaleStore()
     // FIXME: locale option in argument
     const endpoint = store.getLocale === locales.ja ?
-        "https://jabelicwebpress.microcms.io/api/v1/blogs" :
-        "https://jabelicwebpressen.microcms.io/api/v1/blogs"
+        config.apiEndpoint:
+        config.enApiEndpoint
     const options = {
         headers:{
             "X-MICROCMS-API-KEY":

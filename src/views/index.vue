@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { titles } from '~~/i18n/constant';
+import { titles } from '~~/src/shared/i18n/constant';
 import { useLocaleStore } from '~~/store/locale';
 import { useBlogList } from '../interactors/blogList';
 import HomeContents from '~~/src/shared/components/HomeContents.vue'

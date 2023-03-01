@@ -43,7 +43,7 @@ setTimeout(() => { trans.value = false }, 2500);
     <div class="transition" :class="{'anim-trans': trans }"></div>
     <div class="root">
         <div class="title">
-            {{extractTitle(contents?.title ?? "")}}
+            {{ extractTitle(contents?.title ?? "") }}
         </div>
         <div class="main">
             <div class="content">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Locales } from '~~/i18n/locale';
-import { switchLangLabels } from '~~/i18n/constant';
+import { Locales } from '~~/src/shared/i18n/locale';
+import { switchLangLabels } from '~~/src/shared/i18n/constant';
 import { useLocaleStore } from '~~/store/locale';
 
 /** i18n */
