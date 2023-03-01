@@ -1,5 +1,5 @@
 
-import { Article } from '@/adapter/article';
+import { Article } from '~~/src/entities/article';
 import { Ref } from 'nuxt/dist/app/compat/vue-demi';
 
 
@@ -17,7 +17,5 @@ export const useMenu = (contents: Ref<Article|null>) => {
             menu.value.isOpen = false
         },transitionTimeoutMs)
     }
-
-
     return { menu, openMenu, closeMenu, transition, transitionTimeoutMs }
 }

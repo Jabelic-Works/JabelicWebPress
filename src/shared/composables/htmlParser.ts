@@ -1,5 +1,5 @@
 import { Ref } from "@vue/runtime-dom";
-import { Article } from "~~/adapter/article";
+import { Article } from "~~/src/entities/article";
 import { getStructuredMenu } from "~~/model/htmlParser";
 
 

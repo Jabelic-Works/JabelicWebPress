@@ -3,16 +3,10 @@ import { useLocaleStore } from "~~/store/locale"
 import { RuntimeConfig } from '@nuxt/schema';
 import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
 import { _fetch } from "~~/src/shared/utils/fetch";
+import { Category } from "~/src/entities/category";
 
 // API, ACL
-type Category = {
-    createdAt: string,
-    id: string,
-    name: string,
-    publishedAt: string,
-    revisedAt: string,
-    updatedAt: string
-}
+
 // FIXME: categoryは配列？
 export const fetchBlogList = async ():Promise<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: Category}>> => {
     const config:RuntimeConfig = useRuntimeConfig()

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArticleCard } from '~~/src/entities/article';
+import { ArticleCard } from '~~/src/entities/articleCard';
 import Tag from './Tag.vue'
 
 interface Props {
