@@ -10,6 +10,6 @@ export const useBlogList = async (): Promise<ContentsCards['contents']> => {
         title: extractTitle(it.title),
         updatedAt: it.updatedAt,
         description: extractDescription(it.title),
-        tag: [it.category]
+        tags: [{title: it.category.name}]
     }))
 }

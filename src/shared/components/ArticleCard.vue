@@ -29,7 +29,7 @@ const mainColor = ref(appConfig.theme.colors.main)
             </div>
             <div v-if="props.contents.tags" class="card-tags">
               <span v-for="tag in props.contents.tags" class="card-tag">
-                <Tag :title="tag"/>
+                <Tag :tag="tag"/>
               </span>
             </div>
         </section>

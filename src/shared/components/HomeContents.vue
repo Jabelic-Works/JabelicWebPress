@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<Props>(), {
         title: 'title',
         id: '1',
         description: 'description',
-        tag: ['a', 'b'],
+        tags: [{title: 'a'}, {title: 'b'}],
         updatedAt: ''
     }]
 });
@@ -29,15 +29,10 @@ const props = withDefaults(defineProps<Props>(), {
                         title: article.title,
                         id: article.id,
                         description: article.description,
-                        tags: null,
+                        tags: [{title: 'tag'}],
                         to: `article/${article.id}`
                     }"
                     />
-                    <!-- :title="article.title"
-                    :id="article.id ?? 'id'"
-                    :description="article.description"
-                    :tags="null"
-                    :to="`article/${article.id}`" -->
             </div>
         </template>
     </div>

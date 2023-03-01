@@ -1,7 +1,7 @@
 export interface Article {
     title: string;
     description: string;
-    tags: Array<string> | null;
+    tags: Array<{title: string}> | null;
     to: string;
     id: string|number
 }

@@ -1,10 +1,11 @@
+import { Tag } from "~/src/entities/tag"
 
 export interface ContentsCards {
     contents: Array<{
         title: string
         id: string | number 
         description: string
-        tag: Array<string>
+        tags: Array<Tag>
         updatedAt: string
     }>
 }

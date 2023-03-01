@@ -5,9 +5,16 @@ import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
 import { _fetch } from "~~/src/shared/utils/fetch";
 
 // API, ACL
-
-
-export const fetchBlogList = async ():Promise<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: string}>> => {
+type Category = {
+    createdAt: string,
+    id: string,
+    name: string,
+    publishedAt: string,
+    revisedAt: string,
+    updatedAt: string
+}
+// FIXME: categoryは配列？
+export const fetchBlogList = async ():Promise<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: Category}>> => {
     const config:RuntimeConfig = useRuntimeConfig()
     const store = useLocaleStore()
     // FIXME: locale option in argument
@@ -24,6 +31,6 @@ export const fetchBlogList = async ():Promise<MicroCMSListResponse<{id: string, 
     const params = {
         fields: "id,title,main_image,updatedAt,author.name,category"
     }
-    const res = await _fetch<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: string}>>({url: endpoint, params, options})
+    const res = await _fetch<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: Category}>>({url: endpoint, params, options})
     return res
 }

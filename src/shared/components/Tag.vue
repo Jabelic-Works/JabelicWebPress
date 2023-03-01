@@ -1,16 +1,20 @@
-<script setup lang="ts">
-// adapter
-interface Tag {
-    title: string
+<script setup lang="ts">import { Tag } from '~~/src/entities/tag';
+
+// entity
+interface Props { 
+    tag: Tag
 }
-const Props = withDefaults(defineProps<Tag>(), {
-    title: ""
+
+const Props = withDefaults(defineProps<Props>(), {
+    tag: ()=>({
+        title: "tag"
+    })
 });
 </script>
 
 <template>
     <div class="root">
-        {{ Props.title }}
+        {{ Props.tag.title }}
     </div>
 </template>
 
