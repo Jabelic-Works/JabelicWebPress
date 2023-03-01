@@ -41,7 +41,9 @@ watch(()=>store.getLocale, async (arg)=>{
     padding-bottom: 3%;
 }
 h1{
-    font-size: 28px;
+    /* font-size: 28px; */
+    font-size:xx-large;
+    transform: rotate(0.03deg); 
     padding-top: 1%;
 }
 h3{

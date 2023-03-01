@@ -6,14 +6,16 @@
 
 @font-face {
     font-family: 'SawarabiMincho';
+    transform: rotate(0.03deg); 
     src: url('../font/SawarabiMincho/SawarabiMincho-Regular.ttf') format("truetype");
 }
 
 /* https://developer.mozilla.org/ja/docs/Web/CSS/:root */
 :root{
     font-family: 'SawarabiMincho';
+    transform: rotate(0.03deg); 
     color: aliceblue;
-    background-color: black;
+    background-color: rgba(1, 1, 1, 0.900);
     height: 100vh;
     margin: 0%;
 }
