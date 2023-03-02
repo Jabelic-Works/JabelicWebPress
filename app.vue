@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Header  from '~/src/views/components/Header/Header.vue'
-import { APP_NAME }from '~~/src/shared/app/global'
+  import Header from '~/src/views/components/Header/Header.vue'
+  import { APP_NAME } from '~~/src/shared/app/global'
 </script>
 <template>
   <div>
@@ -10,7 +10,7 @@ import { APP_NAME }from '~~/src/shared/app/global'
         <Meta name="description" content="Jabelic Web Press" />
       </Head>
     </Html>
-    <Header/>
-    <NuxtPage/>
+    <Header />
+    <NuxtPage />
   </div>
 </template>

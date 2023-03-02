@@ -1,1 +1,1 @@
-export const APP_NAME = "Jabelic Web Press"
+export const APP_NAME = 'Jabelic Web Press'

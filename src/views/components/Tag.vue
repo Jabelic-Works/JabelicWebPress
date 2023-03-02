@@ -1,24 +1,25 @@
-<script setup lang="ts">import { Tag } from '~~/src/entities/tag';
+<script setup lang="ts">
+  import { Tag } from '~~/src/entities/tag'
 
-interface Props { 
+  interface Props {
     tag: Tag
-}
+  }
 
-const Props = withDefaults(defineProps<Props>(), {
-    tag: ()=>({
-        title: "tag"
+  const Props = withDefaults(defineProps<Props>(), {
+    tag: () => ({
+      title: 'tag'
     })
-});
+  })
 </script>
 
 <template>
-    <div class="root">
-        {{ Props.tag.title }}
-    </div>
+  <div class="root">
+    {{ Props.tag.title }}
+  </div>
 </template>
 
 <style scoped>
-.root{
+  .root {
     display: inline-block;
     padding: 4px 8px;
     margin: 0 8px 10px 0;
@@ -31,5 +32,5 @@ const Props = withDefaults(defineProps<Props>(), {
     position: relative;
     color: white;
     font-family: 'SawarabiMincho';
-}
+  }
 </style>

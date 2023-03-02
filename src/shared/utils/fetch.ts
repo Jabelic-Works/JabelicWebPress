@@ -1,19 +1,26 @@
-
 type Options = {
-    method?: "GET"|"POST"|"UPDATE",
-    headers?: {
-        [key in string]: string
-    },
-    params?: {
-        [key in string]: string
-    },
-    body?: string
+  method?: 'GET' | 'POST' | 'UPDATE'
+  headers?: {
+    [key in string]: string
+  }
+  params?: {
+    [key in string]: string
+  }
+  body?: string
 }
 
-export const _fetch = async<T>({url, params, options}: {url: string, params?: {[key in string]: string}, options?: Options}): Promise<T>=>{
-    const queryParameter =  params ? (url+=`?${Object.keys(params)[0]=params[Object.keys(params)[0]]}`) : ''
-    const res = await fetch(url, options).then<T>(res => res.json());
-    return res
+export const _fetch = async <T>({
+  url,
+  params,
+  options
+}: {
+  url: string
+  params?: { [key in string]: string }
+  options?: Options
+}): Promise<T> => {
+  const queryParameter = params ? (url += `?${(Object.keys(params)[0] = params[Object.keys(params)[0]])}`) : ''
+  const res = await fetch(url, options).then<T>((res) => res.json())
+  return res
 }
 
 // // in-source test suites
@@ -27,7 +34,6 @@ export const _fetch = async<T>({url, params, options}: {url: string, params?: {[
 //         expect(fn).toBeCalledTimes(1)
 //     })
 // }
-
 
 // export function add(...args: number[]) {
 // return args.reduce((a, b) => a + b, 0)
