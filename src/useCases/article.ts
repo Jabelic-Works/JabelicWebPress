@@ -1,4 +1,4 @@
-import { Category } from "./category";
+import { Category } from "~/src/entities/category";
 
 export interface Article{
     id: string,

@@ -1,16 +1,15 @@
 import { locales } from "~~/src/shared/i18n/locale"
 import { useLocaleStore } from "~~/store/locale"
 import { RuntimeConfig } from '@nuxt/schema';
-import { Article } from "~~/src/entities/article";
-import {  } from 'microcms-js-sdk/dist/cjs/types';
 import { _fetch } from "~/src/shared/utils/fetch";
+import { Article } from "~/src/useCases/article";
 
 /**
  * 
  * @param isObject json形式でcontentsをfetchする場合はtrue, HTML形式ならfalse
  * @returns contents
  */
-export const useFetchBlogContent = async (isObject?: boolean) => {
+export const fetchBlogContent = async (isObject?: boolean) => {
     const config:RuntimeConfig = useRuntimeConfig()
     const store = useLocaleStore()
     const route = useRoute()

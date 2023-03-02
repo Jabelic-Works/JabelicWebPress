@@ -1,5 +1,5 @@
 
-import { Article } from '~~/src/entities/article';
+import { Article } from '~~/src/useCases/article';
 import { Ref } from 'nuxt/dist/app/compat/vue-demi';
 
 

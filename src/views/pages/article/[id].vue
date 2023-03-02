@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RuntimeConfig } from '@nuxt/schema';
-import { useFetchBlogContent } from '~~/src/infra/fetchBlogContents';
 import { useLocaleStore } from '~~/store/locale';
 import { useMenu } from '~~/src/views/composables/menu'
-import { useTitleAndDescription } from '../../composables/titleAndDescription';
+import { useTitleAndDescription } from '~/src/views/composables/titleAndDescription';
+import { useFetchBlogContent } from '~~/src/interactors/fetchBlogContents';
 
 const config:RuntimeConfig = useRuntimeConfig()
 const route = useRoute()
