@@ -2,7 +2,7 @@
 import { titles } from '~~/src/shared/i18n/constant';
 import { locales, Locales } from '~~/src/shared/i18n/locale';
 import { useLocaleStore } from '~~/store/locale';
-import SelectLang from '~/src/shared/components/Header/SelectLang.vue'
+import SelectLang from '~/src/views/components/Header/SelectLang.vue'
 const router = useRouter()
 
 /** 右上メニュー */

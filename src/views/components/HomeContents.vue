@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ArticleCard from '~/src/shared/components/ArticleCard.vue'
+import ArticleCard from '~/src/views/components/ArticleCard.vue'
 import { ContentsCards } from '~/src/useCases/blogList';
 
 type Props = {

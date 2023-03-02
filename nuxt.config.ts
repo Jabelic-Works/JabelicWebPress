@@ -33,18 +33,18 @@ export default defineNuxtConfig({
   components: [
     /** components内のディレクトリを無関係として、ファイル名でauto importさせる設定 */
     {
-      path: "/<rootDir>/src/shared/components",
+      path: "/<rootDir>/src/views/components",
       pathPrefix: false
     }
   ],
   imports: {
     dirs: [
       // Scan top-level modules
-      'src/shared/composables',
+      'src/views/composables',
       // ... or scan modules nested one level deep with a specific name and file extension
-      'src/shared/composables/*/index.{ts,js,mjs,mts}',
+      'src/views/composables/*/index.{ts,js,mjs,mts}',
       // ... or scan all modules within given directory
-      'src/shared/composables/**'
+      'src/views/composables/**'
     ]
   }
 })

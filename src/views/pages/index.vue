@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { titles } from '~~/src/shared/i18n/constant';
 import { useLocaleStore } from '~~/store/locale';
-import { useBlogList } from '../interactors/blogList';
-import HomeContents from '~~/src/shared/components/HomeContents.vue'
+import { useBlogList } from '~/src/interactors/blogList';
+import HomeContents from '~~/src/views/components/HomeContents.vue'
 
 useHead(
     {

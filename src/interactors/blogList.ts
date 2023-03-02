@@ -1,5 +1,6 @@
 import { fetchBlogList } from "~/src/infra/fetchBlogList"
 import { ContentsCards } from '~/src/useCases/blogList';
+import { useTitleAndDescription } from "../views/composables/titleAndDescription";
 
 
 export const useBlogList = async (): Promise<ContentsCards['contents']> => {

@@ -2,13 +2,13 @@
 import { RuntimeConfig } from '@nuxt/schema';
 import { useFetchBlogContent } from '~~/src/infra/fetchBlogContents';
 import { useLocaleStore } from '~~/store/locale';
-import {useMenu} from '~/src/interactors/menu'
+import { useMenu } from '~~/src/views/composables/menu'
+import { useTitleAndDescription } from '../../composables/titleAndDescription';
 
 const config:RuntimeConfig = useRuntimeConfig()
 const route = useRoute()
 const store = useLocaleStore()
 
-// const contents = await useFetchBlogContent()
 const contents = (await useLazyAsyncData(async ()=>await useFetchBlogContent())).data
 
 watch(()=>store.getLocale, async (arg)=>{

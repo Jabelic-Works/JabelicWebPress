@@ -5,17 +5,17 @@ export default <RouterConfig> {
       {
         name: 'home',
         path: '/',
-        component: () => import('~/src/views/index.vue')
+        component: () => import('~/src/views/pages/index.vue')
       },
       {
         name: 'profile',
         path: '/profile',
-        component: () => import('~/src/views/profile.vue')
+        component: () => import('~/src/views/pages/profile.vue')
       },
       {
         name: 'article',
         path: '/article/:id?',
-        component: () => import('~/src/views/article/[id].vue')
+        component: () => import('~/src/views/pages/article/[id].vue')
       }
     ],
   }
