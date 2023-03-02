@@ -9,10 +9,9 @@ const config:RuntimeConfig = useRuntimeConfig()
 const route = useRoute()
 const store = useLocaleStore()
 
-const contents = (await useLazyAsyncData(async ()=>await useFetchBlogContent())).data
-
+const contents = (await useLazyAsyncData(async ()=>await useFetchBlogContent(route.params.id, store.getLocale, config))).data
 watch(()=>store.getLocale, async (arg)=>{
-    const _contents = (await useLazyAsyncData(async ()=>await useFetchBlogContent())).data
+    const _contents = (await useLazyAsyncData(async ()=>await useFetchBlogContent(route.params.id, store.getLocale, config))).data
     contents.value = _contents.value
 })
 

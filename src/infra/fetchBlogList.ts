@@ -1,24 +1,18 @@
-import { locales } from "~~/src/shared/i18n/locale"
+import { Locales, locales } from "~~/src/shared/i18n/locale"
 import { useLocaleStore } from "~~/store/locale"
 import { RuntimeConfig } from '@nuxt/schema';
 import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types';
 import { _fetch } from "~~/src/shared/utils/fetch";
 import { Category } from "~/src/entities/category";
-
 // API, ACL
 
 // FIXME: categoryは配列？
-export const fetchBlogList = async ():Promise<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: Category}>> => {
-    const config:RuntimeConfig = useRuntimeConfig()
-    const store = useLocaleStore()
-    // FIXME: locale option in argument
-    const endpoint = store.getLocale === locales.ja ?
-        config.apiEndpoint:
-        config.enApiEndpoint
+export const fetchBlogList = async (config: {apikey:string, enApikey:string, apiEndpoint: string, enApiEndpoint: string}, currentLocale: Locales):Promise<MicroCMSListResponse<{id: string, title: string, updatedAt: string, category: Category}>> => {
+    const endpoint = currentLocale === locales.ja ? config.apiEndpoint : config.enApiEndpoint
     const options = {
         headers:{
             "X-MICROCMS-API-KEY":
-            store.getLocale === locales.ja ? config.apikey : config.enApikey
+            currentLocale === locales.ja ? config.apikey : config.enApikey
         },
     }
     // FIXME: define fields types(union)

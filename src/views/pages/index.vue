@@ -3,6 +3,7 @@ import { titles } from '~~/src/shared/i18n/constant';
 import { useLocaleStore } from '~~/store/locale';
 import { useBlogList } from '~/src/interactors/blogList';
 import HomeContents from '~~/src/views/components/HomeContents.vue'
+import { RuntimeConfig } from '@nuxt/schema';
 
 useHead(
     {
@@ -16,11 +17,11 @@ const trans = ref(true)
 setTimeout(() => {trans.value = false}, 2500);
 const store = useLocaleStore()
 const _titles = computed(()=>titles[store.getLocale])
+const config: RuntimeConfig = useRuntimeConfig()
 
-
-const contents = (await useLazyAsyncData(async ()=>await useBlogList())).data
-watch(()=>store.getLocale, async (arg)=>{
-    contents.value = (await useLazyAsyncData(async ()=>await useBlogList())).data.value
+const contents = (await useLazyAsyncData(async ()=>await useBlogList(config, store.getLocale))).data
+watch(()=>store.getLocale, async ()=>{
+    contents.value = (await useLazyAsyncData(async ()=>await useBlogList(config, store.getLocale))).data.value
 })
 </script>
 
