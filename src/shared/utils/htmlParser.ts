@@ -6,6 +6,25 @@ export const formatTitleAndTagToStructuredMenuItem = (arg: TitleAndTag, _child?:
   id: arg.id,
   child: _child ?? []
 })
+
+export const getInnerText = (arg: string) => {
+  let begin = 0
+  let end = 0
+  for (let i = 0; i < arg.length; i++) {
+    if (arg[i] === '>' && begin === 0) begin = i
+  }
+  for (let i = arg.length - 1; i > 0; i--) {
+    if (arg[i] === '<' && end === 0) end = i
+  }
+  return arg.slice(begin + 1, end)
+}
+
+export const getElementId = (arg: string) => {
+  const ids = /id="(.*)"/gi
+  const matches = arg.match(ids)
+  if (matches && matches[0]) return matches[0].slice(4, -1)
+}
+
 export const getStructuredMenu = (titleAndTags: TitleAndTag[]) => {
   let obj: StructuredMenuItem[] = []
   titleAndTags.forEach((it) => {

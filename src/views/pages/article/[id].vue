@@ -4,6 +4,7 @@ import { useLocaleStore } from '~~/store/locale';
 import { useMenu } from '~~/src/views/composables/menu'
 import { useTitleAndDescription } from '~/src/views/composables/titleAndDescription';
 import { useFetchBlogContent } from '~~/src/interactors/fetchBlogContents';
+import {useHtmlParser} from '~/src/views/composables/htmlParser'
 
 const config:RuntimeConfig = useRuntimeConfig()
 const route = useRoute()
