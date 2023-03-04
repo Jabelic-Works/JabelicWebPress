@@ -1,4 +1,12 @@
-import { StructuredMenuItem, TitleAndTag } from '~~/src/views/composables/htmlParser'
+export type TitleTag = 'H1' | 'H2' | 'H3' //| "H4"
+export type TitleAndTag = { text: string; tag: TitleTag; id?: string }
+
+export interface StructuredMenuItem {
+  text: string
+  tag: TitleTag
+  id: string | undefined
+  child: Array<StructuredMenuItem>
+}
 
 export const formatTitleAndTagToStructuredMenuItem = (arg: TitleAndTag, _child?: any): StructuredMenuItem => ({
   text: arg.text,
@@ -7,22 +15,113 @@ export const formatTitleAndTagToStructuredMenuItem = (arg: TitleAndTag, _child?:
   child: _child ?? []
 })
 
+// in-source test suites
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest
+  it('formatTitleAndTagToStructuredMenuItem', () => {
+    expect(formatTitleAndTagToStructuredMenuItem({ text: 'hoge', tag: 'H1', id: 'thisIsId' }, [])).toStrictEqual({
+      text: 'hoge',
+      tag: 'H1',
+      id: 'thisIsId',
+      child: []
+    })
+  })
+}
+
 export const getInnerText = (arg: string) => {
-  let begin = 0
-  let end = 0
-  for (let i = 0; i < arg.length; i++) {
-    if (arg[i] === '>' && begin === 0) begin = i
-  }
-  for (let i = arg.length - 1; i > 0; i--) {
-    if (arg[i] === '<' && end === 0) end = i
-  }
-  return arg.slice(begin + 1, end)
+  if (!arg.includes('<') || !arg.includes('>')) return ''
+  const begin = arg.split('').findIndex((it: string, index: number) => it === '>')
+  const end =
+    arg.length -
+    arg
+      .split('')
+      .reverse()
+      .findIndex((it: string, index: number) => it === '<')
+  if ([begin, end].includes(0)) return ''
+  return arg.slice(begin + 1, end - 1)
+}
+
+// in-source test suites
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest
+  it('getInnerText', () => {
+    expect(getInnerText('hoge')).toBe('')
+    expect(getInnerText('<h1>これはタイトルです</h1>')).toBe('これはタイトルです')
+    expect(getInnerText('<h2>これはタイトルです</h2>')).toBe('これはタイトルです')
+  })
 }
 
 export const getElementId = (arg: string) => {
-  const ids = /id="(.*)"/gi
+  const ids = /id=["'](.*)["']/gi
   const matches = arg.match(ids)
   if (matches && matches[0]) return matches[0].slice(4, -1)
+}
+
+// in-source test suites
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest
+  it('getElementId', () => {
+    expect(getElementId('<div id="123"></div>')).toBe('123')
+    expect(getElementId("<div id='123'>")).toBe('123')
+    expect(getElementId('<div class="id"></div>')).toBe(undefined)
+  })
+}
+
+/**
+ * 引数で渡されたtagを検知するRegExpを返す. ['h1', 'h2']であればその両方を検知するRegExpとなる。
+ * @param {Array<string>} tags - tagのリスト。
+ * @return {RegExp} /<(h1|h2|...).*?(h1|h2|...)>/gi
+ */
+export const getHtmlBlocksRegExp = (tags: Array<string>): RegExp => {
+  const tagsUnion = tags.join('|')
+  // prettier-ignore
+  return new RegExp(`<(${tagsUnion}).*?(${tagsUnion})>`, 'gi')
+}
+
+// in-source test suites
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest
+  it('getHtmlBlocksRegExp', () => {
+    expect(getHtmlBlocksRegExp(['h1'])).toStrictEqual(/<(h1).*?(h1)>/gi)
+    expect(getHtmlBlocksRegExp(['h1', 'h2'])).toStrictEqual(/<(h1|h2).*?(h1|h2)>/gi)
+  })
+}
+
+/**
+ * @param detectTitles
+ * @param contents
+ * @returns detectTitlesにmatchするelement全体の情報を返す。
+ */
+export const getTitleAndTags = (detectTitles: RegExp, contents: string | undefined): TitleAndTag[] | undefined => {
+  const H1s = /(\<(h1)[^\>]*\>).*?(\<\/(h1)\>)/gi
+  const H2s = /(\<(h2)[^\>]*\>).*?(\<\/(h2)\>)/gi
+  return contents?.match(detectTitles)?.map((it): TitleAndTag => {
+    // NOTE: it := <h1 id="hogeid">huga</h1> など.
+    const title = getInnerText(it)
+    return {
+      text: title?.length ? title : it,
+      tag: it.match(H1s) ? 'H1' : it.match(H2s) ? 'H2' : 'H3',
+      id: getElementId(it)
+    }
+  })
+}
+// in-source test suites
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest
+  it('getTitleAndTags', () => {
+    expect(
+      getTitleAndTags(
+        /<(h1|h2).*?(h1|h2)>/gi,
+        '<div><h1 id="thisIsH1">hogehuga</h1><h2 id="thisIsH2">piyopiyo</h2></div>'
+      )
+    ).toStrictEqual([
+      { text: 'hogehuga', tag: 'H1', id: 'thisIsH1' },
+      { text: 'piyopiyo', tag: 'H2', id: 'thisIsH2' }
+    ])
+    expect(getTitleAndTags(/<(h1|h2).*?(h1|h2)>/gi, '<div><h1></h1></div>')).toStrictEqual([
+      { text: '<h1></h1>', tag: 'H1', id: undefined }
+    ])
+  })
 }
 
 export const getStructuredMenu = (titleAndTags: TitleAndTag[]) => {

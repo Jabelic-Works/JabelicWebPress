@@ -37,7 +37,7 @@ useHead({
 })
 
 /** animation */
-const animationDuration = ref(`${transitionTimeoutMs/1000}s`)
+const animationDuration = ref(`${transitionTimeoutMs/1000}s` ?? '0.5s')
 const trans = ref(true)
 setTimeout(() => { trans.value = false }, 2500);
 </script>
