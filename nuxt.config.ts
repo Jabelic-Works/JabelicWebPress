@@ -17,23 +17,20 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/style/_reset.css', '~/assets/style/index.css'],
-  modules: ['@pinia/nuxt'],
-  app:{
+  modules: ['@pinia/nuxt', '@vueuse/nuxt'],
+  app: {
     head: {
-      title: "Jabelic Web Press",
-      meta: [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-      ],
+      title: 'Jabelic Web Press',
+      meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
       link: [
-        { rel: "icon", type: "image/png", href: "/icon-16x16.png" }, // これを追記する
-      ],
-    },
+        { rel: 'icon', type: 'image/png', href: '/icon-16x16.png' } // これを追記する
+      ]
+    }
   },
   components: [
     /** components内のディレクトリを無関係として、ファイル名でauto importさせる設定 */
     {
-      path: "/<rootDir>/src/views/components",
+      path: '/<rootDir>/src/views/components',
       pathPrefix: false
     }
   ],

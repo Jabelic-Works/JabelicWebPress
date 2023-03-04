@@ -65,7 +65,7 @@
   }
   .home-icon {
     width: auto;
-    height: 100%;
+    /* height: 100%; */
   }
   .lang-switch {
     display: flex;
