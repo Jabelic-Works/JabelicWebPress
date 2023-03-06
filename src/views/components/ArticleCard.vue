@@ -97,7 +97,7 @@
     color: #0090aa;
     color: rgba(30, 255, 0, 0.9);
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     .card-title {
       font-size: 14px;
       margin-top: 10px;

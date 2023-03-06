@@ -4,6 +4,8 @@
   import { useBlogList } from '~/src/interactors/blogList'
   import HomeContents from '~~/src/views/components/HomeContents.vue'
   import { RuntimeConfig } from '@nuxt/schema'
+  import SelectLang from '~/src/views/components/Header/SelectLang.vue'
+  import { useRootElementStore } from '~~/store/rootElement'
 
   useHead({
     titleTemplate: '%s',
@@ -26,11 +28,18 @@
       contents.value = (await useLazyAsyncData(async () => await useBlogList(config, store.getLocale))).data.value
     }
   )
+  /** i18n */
+  const route = useRoute()
+  const rootElementStore = useRootElementStore()
+  const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth <= 480)
 </script>
 
 <template>
   <div class="transition" :class="{ 'anim-trans': trans }"></div>
   <div class="root">
+    <div v-if="isShowLangSwitcher" class="lang-switch">
+      <SelectLang />
+    </div>
     <div class="sub-header">
       <h1>{{ _titles.subTitle }}</h1>
     </div>
@@ -54,13 +63,24 @@
     font-size: 20px;
     padding-top: 1%;
   }
-  @media screen and (max-width: 768px) {
+  .lang-switch {
+    text-align: end;
+    margin-right: 3vw;
+    margin-top: 3vw;
+  }
+  @media screen and (max-width: 800px) {
     h1 {
-      font-size: 30px;
+      font-size: 24px;
+      padding-top: 3%;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    h1 {
+      font-size: 20px;
       padding-top: 3%;
     }
     h3 {
-      font-size: 16px;
+      font-size: 14px;
       padding-top: 3%;
     }
   }

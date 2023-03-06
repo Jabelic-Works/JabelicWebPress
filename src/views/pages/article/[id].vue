@@ -101,7 +101,6 @@
     </div>
     <div class="dummy-margin"></div>
   </div>
-  <!-- <Menu class="menu"></Menu> -->
 </template>
 
 <style scoped>
@@ -250,17 +249,10 @@
       background-color: #245941;
       height: 5vh;
       font-size: 1rem;
-      /* display: grid; */
-      /* place-items: 縦 横;  */
       place-items: center start;
       white-space: pre;
       overflow-x: scroll;
     }
-    /* .content {
-      display: grid;
-      grid-template-columns: 8vw 92vw;
-      padding: 0%;
-    } */
 
     .main {
       display: grid;

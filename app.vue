@@ -4,10 +4,13 @@
   import { useElementSize } from '@vueuse/core'
   import { useRootElementStore } from './store/rootElement'
   const el = ref(null)
-  const { height: elHeight } = useElementSize(el)
+  const { height: elHeight, width: elWidth } = useElementSize(el)
   const store = useRootElementStore()
   watch(elHeight, (arg) => {
     store.setHeight(arg)
+  })
+  watch(elWidth, (arg) => {
+    store.setWidth(arg)
   })
 </script>
 <template>
