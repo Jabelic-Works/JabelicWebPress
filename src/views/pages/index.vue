@@ -31,7 +31,7 @@
   /** i18n */
   const route = useRoute()
   const rootElementStore = useRootElementStore()
-  const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth <= 480)
+  const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth <= 600)
 </script>
 
 <template>

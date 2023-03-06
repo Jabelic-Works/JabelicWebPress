@@ -31,10 +31,10 @@
 
   /** i18n */
   const route = useRoute()
-  const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth > 480)
+  const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth > 600)
 
   const headerHeight = ref('5vh')
-  const mobileheaderHeight = ref('5vh')
+  const mobileHeaderHeight = ref('5vh')
 </script>
 
 <template>
@@ -174,12 +174,12 @@
   @media screen and (max-width: 700px) {
     .header-root {
       grid-template-columns: repeat(10, 1fr);
-      grid-template-rows: v-bind(mobileheaderHeight) 1fr;
-      height: v-bind(mobileheaderHeight);
+      grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
+      height: v-bind(mobileHeaderHeight);
     }
     .left {
-      height: v-bind(mobileheaderHeight);
-      grid-template-rows: v-bind(mobileheaderHeight) 1fr;
+      height: v-bind(mobileHeaderHeight);
+      grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
       grid-column-start: 0;
       grid-column-end: 8;
       grid-template-columns: repeat(10, 1fr);
@@ -195,8 +195,8 @@
       grid-column-end: 9;
     }
     .right {
-      height: v-bind(mobileheaderHeight);
-      grid-template-rows: v-bind(mobileheaderHeight) 1fr;
+      height: v-bind(mobileHeaderHeight);
+      grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
       grid-column-start: 8;
       grid-column-end: 11;
       grid-template-columns: repeat(3, 1fr);
@@ -206,16 +206,16 @@
     .header-root {
       display: grid;
       grid-template-columns: repeat(10, 1fr);
-      grid-template-rows: v-bind(mobileheaderHeight) 1fr;
-      height: v-bind(mobileheaderHeight);
+      grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
+      height: v-bind(mobileHeaderHeight);
       background-color: v-bind(mainDarkColor);
     }
     .left {
-      height: v-bind(mobileheaderHeight);
+      height: v-bind(mobileHeaderHeight);
       grid-column-start: 0;
       grid-column-end: 8;
       grid-template-columns: repeat(10, 1fr);
-      grid-template-rows: v-bind(mobileheaderHeight) 1fr;
+      grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
     }
     .header-title {
       font-size: 14px;
@@ -230,17 +230,17 @@
       grid-column-end: 9;
     }
     .right {
-      height: v-bind(mobileheaderHeight);
+      height: v-bind(mobileHeaderHeight);
       grid-column-start: 8;
       grid-column-end: 11;
       justify-content: end;
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: v-bind(mobileheaderHeight) 1fr;
+      grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
     }
     .content {
       font-size: 14px;
-      height: v-bind(mobileheaderHeight);
-      grid-template-rows: v-bind(mobileheaderHeight) 1fr;
+      height: v-bind(mobileHeaderHeight);
+      grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
       text-decoration: none;
       color: aliceblue;
       transition: 0.5s;
