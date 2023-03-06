@@ -3,9 +3,8 @@ export default defineAppConfig({
   theme: {
     dark: true,
     colors: {
-      main: '#04C000',
-      mainAccent: '#18F291',
-      mainDark: '#245941',
+      main: '#245941',
+      mainAccent: '#04C000',
       accent: '#C532C7'
     }
   }

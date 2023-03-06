@@ -24,7 +24,7 @@
 
   /** カラー */
   const appConfig = useAppConfig()
-  const mainDarkColor = ref(appConfig.theme.colors.mainDark)
+  const mainDarkColor = ref(appConfig.theme.colors.main)
 
   /** 戻るボタン */
   const backTo = () => router.push('/')
