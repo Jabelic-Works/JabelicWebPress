@@ -16,7 +16,7 @@
     })
   })
   const appConfig = useAppConfig()
-  const mainDarkColor = ref(appConfig.theme.colors.mainDark)
+  const mainDarkColor = ref(appConfig.theme.colors.main)
   const mainColor = ref(appConfig.theme.colors.main)
 </script>
 
@@ -40,16 +40,15 @@
   .card {
     background: black;
     border: 0.1rem solid;
-    border-color: v-bind(mainDarkColor);
+    border-color: rgba(8, 102, 0, 0);
     border-radius: 5px;
-    box-shadow: 0 1px 2px #ccc;
     border-radius: 0.5rem;
     transition: 0.5s;
   }
   .card:hover,
   .card:active {
-    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.5);
     border: solid 0.1rem v-bind(mainColor);
+    border-color: v-bind(mainDarkColor);
     color: yellow;
   }
   .card-content {

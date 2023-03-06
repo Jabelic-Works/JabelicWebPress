@@ -118,7 +118,6 @@
     place-items: center start;
     white-space: pre;
     overflow-x: scroll;
-    box-shadow: 2px 2px 2px 2px rgba(83, 235, 60, 0.224);
   }
   /* .content{} */
 
@@ -262,8 +261,6 @@
       grid-column-start: 1;
       grid-column-end: 2;
       background-color: rgba(36, 89, 65, 1);
-      /* width: 4vw; */
-      box-shadow: 0.2rem 0.3rem 0.3rem rgba(83, 235, 60, 0.224);
       position: sticky;
       top: 0px;
     }

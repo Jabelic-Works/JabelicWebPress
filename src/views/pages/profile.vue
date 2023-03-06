@@ -16,7 +16,6 @@
     }
   })
   const appConfig = useAppConfig()
-  const mainDarkColor = ref(appConfig.theme.colors.mainDark)
   const mainColor = ref(appConfig.theme.colors.main)
 
   const trans = ref(true)
@@ -45,7 +44,6 @@
 </template>
 <style scoped>
   .root {
-    background-color: black;
     font-family: 'SawarabiMincho';
   }
   h1 {
@@ -58,8 +56,6 @@
     background-color: black;
     padding: 1%;
     margin: 1%;
-    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
-    border: solid 0.1rem v-bind(mainDarkColor);
     border-radius: 0.5rem;
     transition: 0.5s;
     color: white;
@@ -69,7 +65,7 @@
   }
   .profile-card:hover,
   .profile-card:active {
-    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 1px 1px 0px rgba(255, 255, 255, 0.5);
     border: solid 0.1rem v-bind(mainColor);
     border-radius: 0.5rem;
   }
