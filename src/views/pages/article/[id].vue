@@ -6,7 +6,7 @@
   import { useFetchBlogContent } from '~~/src/interactors/fetchBlogContents'
   import { useHtmlParser } from '~/src/views/composables/htmlParser'
   import MenuBar from '~/src/views/components/MenuBar.vue'
-  import { useElementSize } from '@vueuse/core'
+  // import { useElementSize } from '@vueuse/core'
   import { useRootElementStore } from '~~/store/rootElement'
   const config: RuntimeConfig = useRuntimeConfig()
   const route = useRoute()
@@ -35,7 +35,6 @@
   const { width, height } = useWindowSize()
   const rootElementStore = useRootElementStore()
   const rootHeight = computed(() => `${rootElementStore.getHeight}px`)
-  setTimeout(() => console.debug(rootHeight.value), 400)
   const { menu, transition, transitionTimeoutMs, openMenu, closeMenu, menuState } = useMenu(
     contents,
     computed(() => width.value)
@@ -63,19 +62,29 @@
 <template>
   <div class="transition" :class="{ 'anim-trans': trans }"></div>
   <div class="root" ref="el">
-    <div class="title">
-      {{ extractTitle(contents?.title ?? '') }}
+    <div v-if="menuState === 'large'" class="content">
+      <div class="title">
+        {{ extractTitle(contents?.title ?? '') }}
+      </div>
+      <div class="main">
+        <!-- 本文 -->
+        <div v-html="contents?.content" class="article"></div>
+      </div>
     </div>
-    <div class="main">
-      <div v-if="menuState === 'large'" class="content-large">
+    <div v-else-if="menuState === 'medium'" class="content">
+      <div class="title">
+        {{ extractTitle(contents?.title ?? '') }}
+      </div>
+      <div class="main">
         <!-- 本文 -->
         <div v-html="contents?.content" class="article"></div>
       </div>
-      <div v-else-if="menuState === 'medium'" class="content-large">
-        <!-- 本文 -->
-        <div v-html="contents?.content" class="article"></div>
+    </div>
+    <div v-else-if="menuState === 'small'" class="content-small">
+      <div class="title">
+        {{ extractTitle(contents?.title ?? '') }}
       </div>
-      <div v-if="menuState === 'small'" class="content">
+      <div class="main">
         <!-- 折りたたみ状態のmenu -->
         <div @click.stop="openMenu" class="menu">
           <template v-if="!menu.isOpen">
@@ -86,16 +95,16 @@
         </div>
         <!-- 本文 -->
         <div v-html="contents?.content" class="article"></div>
-        <!-- overlay -->
-        <div v-if="menu.isOpen" @click="closeMenu" class="shadow" :class="{ fadeout: transition }"></div>
-        <!-- menu bar -->
-        <MenuBar
-          v-if="menuState === 'small'"
-          :menus="{ menu, transition, transitionTimeoutMs, openMenu, closeMenu }"
-          :structured-menus="{ structuredMenu }"
-          :height="height"
-        />
       </div>
+
+      <!-- overlay -->
+      <div v-if="menu.isOpen" @click="closeMenu" class="shadow" :class="{ fadeout: transition }"></div>
+      <!-- menu bar -->
+      <MenuBar
+        :menus="{ menu, transition, transitionTimeoutMs, openMenu, closeMenu }"
+        :structured-menus="{ structuredMenu }"
+        :height="height"
+      />
     </div>
     <div class="dummy-margin"></div>
   </div>
@@ -119,56 +128,13 @@
     overflow-x: scroll;
     box-shadow: 2px 2px 2px 2px rgba(83, 235, 60, 0.224);
   }
-  .content {
-    display: grid;
-    grid-template-columns: 5vw 95vw;
-    padding: 0%;
-    position: relative;
-  }
-  .menu {
-    background-color: rgba(36, 89, 65, 1);
-    width: 4vw;
-    box-shadow: 0.2rem 0.3rem 0.3rem rgba(83, 235, 60, 0.224);
-  }
+  /* .content{} */
+
   .menu-btn {
-    /* height: 100vh; */
     display: grid;
     place-content: center;
     transition: 0.5s;
   }
-
-  /* 左から右にフェードイン */
-  /* .menu-bar-transition {
-    animation-name: fadeLeftAnime;
-    animation-duration: v-bind(animationDuration);
-    animation-fill-mode: forwards;
-    opacity: 0;
-  }
-  @keyframes fadeLeftAnime {
-    from {
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  } */
-
-  /* 右から左へフェードアウト */
-  /* .fadeOutToRight {
-    animation: fadeout v-bind(animationDuration) ease 0s 1 forwards;
-  }
-  @keyframes fadeout {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-30vw);
-    }
-  } */
 
   .menu-btn-img {
     height: 5vh;
@@ -199,7 +165,7 @@
     }
   }
   /** 背景要素(白い影)をfadeoutさせる */
-  /* .shadow.fadeout {
+  .shadow.fadeout {
     animation: fadeout v-bind(animationDuration) ease 0s 1 forwards;
     height: 120%;
   }
@@ -210,7 +176,7 @@
     100% {
       opacity: 0;
     }
-  } */
+  }
 
   .article {
     padding: 2vw;
@@ -286,25 +252,42 @@
     margin-top: 1em;
   }
 
-  /* @media screen and (max-width: 768px) { */
   @media screen and (max-width: 600px) {
     .title {
       background-color: #245941;
       height: 5vh;
       font-size: 1rem;
-      display: grid;
+      /* display: grid; */
       /* place-items: 縦 横;  */
       place-items: center start;
       white-space: pre;
       overflow-x: scroll;
     }
-    .content {
+    /* .content {
       display: grid;
       grid-template-columns: 8vw 92vw;
       padding: 0%;
+    } */
+
+    .main {
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
     }
-    .menu {
-      width: 6vw;
+    .main >>> .menu {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      background-color: rgba(36, 89, 65, 1);
+      /* width: 4vw; */
+      box-shadow: 0.2rem 0.3rem 0.3rem rgba(83, 235, 60, 0.224);
+      position: sticky;
+      top: 0px;
+    }
+    .main >>> .article {
+      grid-column-start: 2;
+      grid-column-end: 16;
+      padding: 2vw;
+      margin: 2vw;
+      /* margin-left: 7vw;f */
     }
     .menu-btn {
       place-content: center;
