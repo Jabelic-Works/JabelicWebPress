@@ -16,7 +16,6 @@
     }
   })
   const appConfig = useAppConfig()
-  // const mainDarkColor = ref(appConfig.theme.colors.main)
   const mainColor = ref(appConfig.theme.colors.main)
 
   const trans = ref(true)
