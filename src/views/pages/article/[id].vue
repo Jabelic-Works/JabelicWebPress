@@ -6,7 +6,6 @@
   import { useFetchBlogContent } from '~~/src/interactors/fetchBlogContents'
   import { useHtmlParser } from '~/src/views/composables/htmlParser'
   import MenuBar from '~/src/views/components/MenuBar.vue'
-  // import { useElementSize } from '@vueuse/core'
   import { useRootElementStore } from '~~/store/rootElement'
   const config: RuntimeConfig = useRuntimeConfig()
   const route = useRoute()
@@ -25,12 +24,6 @@
     }
   )
 
-  /** All listed items must be kind of heading tag(h1, h2, h3, ...) */
-  // type ListedMenu = Array<{
-  //   text: string
-  //   id: string | undefined
-  //   child: Array<ListedMenu>
-  // }>
   const { structuredMenu } = useHtmlParser(contents)
   const { width, height } = useWindowSize()
   const rootElementStore = useRootElementStore()
@@ -273,7 +266,7 @@
       display: grid;
       grid-template-columns: repeat(15, 1fr);
     }
-    .main >>> .menu {
+    .main :deep(.menu) {
       grid-column-start: 1;
       grid-column-end: 2;
       background-color: rgba(36, 89, 65, 1);
@@ -282,7 +275,7 @@
       position: sticky;
       top: 0px;
     }
-    .main >>> .article {
+    .main :deep(.article) {
       grid-column-start: 2;
       grid-column-end: 16;
       padding: 2vw;
