@@ -113,8 +113,6 @@ const animationDuration = ref(`${props.menus.transitionTimeoutMs / 1000}s` ?? '0
 
   .menu-bar {
     width: 40vw;
-    /* height: 120%; */
-    /* min-height:100vh; */
     background-color: #245941;
     /*
         親要素が position: relative; (or fixed) であれば

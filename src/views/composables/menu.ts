@@ -16,10 +16,9 @@ export const useMenu = (contents: Ref<Article | null>, innerWidth: ComputedRef<n
     }, transitionTimeoutMs)
   }
   const menuState = computed(() => {
-    console.debug(innerWidth.value)
     if (typeof window !== 'undefined' && innerWidth.value < 600) return 'small'
     else if (typeof window !== 'undefined' && innerWidth.value < 1200) return 'medium'
-    else return 'large'
+    else if (typeof window !== 'undefined' && innerWidth.value > 1200) return 'large'
   })
   return { menu, openMenu, closeMenu, transition, transitionTimeoutMs, menuState }
 }
