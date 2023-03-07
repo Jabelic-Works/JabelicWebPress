@@ -28,7 +28,10 @@ export default defineNuxtConfig({
     }
   },
   components: [
-    /** components内のディレクトリを無関係として、ファイル名でauto importさせる設定 */
+    /**
+     * components内のディレクトリ構成を無視してauto importさせる設定
+     * -> ファイル名はuniqueであることが必須となる
+     */
     {
       path: '/<rootDir>/src/views/components',
       pathPrefix: false
