@@ -1,9 +1,6 @@
 import { Locales, locales } from '~~/src/shared/i18n/locale'
-import { useLocaleStore } from '~~/store/locale'
-import { RuntimeConfig } from '@nuxt/schema'
 import { _fetch } from '~/src/shared/utils/fetch'
 import { Article } from '~/src/useCases/article'
-import { RouteLocationNormalizedLoaded } from 'vue-router'
 
 /**
  *

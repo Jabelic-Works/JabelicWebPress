@@ -3,24 +3,21 @@
   import { useLocaleStore } from '~~/store/locale'
   import { useMenu } from '~~/src/views/composables/menu'
   import { useTitleAndDescription } from '~/src/views/composables/titleAndDescription'
-  import { useFetchBlogContent } from '~~/src/interactors/fetchBlogContents'
   import { useHtmlParser } from '~/src/views/composables/htmlParser'
   import MenuBar from '~/src/views/components/MenuBar.vue'
   import { useRootElementStore } from '~~/store/rootElement'
   const config: RuntimeConfig = useRuntimeConfig()
   const route = useRoute()
   const store = useLocaleStore()
-
-  const contents = (
-    await useLazyAsyncData(async () => await useFetchBlogContent(route.params.id, store.getLocale, config))
-  ).data
+  const { $getBlogContent } = useNuxtApp()
+  const contents = (await useLazyAsyncData(async () => await $getBlogContent(route.params.id, store.getLocale, config)))
+    .data
   watch(
     () => store.getLocale,
     async () => {
-      const _contents = (
-        await useLazyAsyncData(async () => await useFetchBlogContent(route.params.id, store.getLocale, config))
-      ).data
-      contents.value = _contents.value
+      contents.value = (
+        await useLazyAsyncData(async () => await $getBlogContent(route.params.id, store.getLocale, config))
+      ).data.value
     }
   )
 
@@ -223,6 +220,7 @@
   .root :deep(li) {
     font-size: 14px;
     margin-top: 1em;
+    margin-left: 3em;
   }
   .root :deep(a) {
     font-size: 14px;

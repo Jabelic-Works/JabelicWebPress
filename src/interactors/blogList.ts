@@ -1,7 +1,6 @@
 import { fetchBlogList } from '~/src/infra/fetchBlogList'
 import { ContentsCards } from '~/src/useCases/blogList'
 import { useTitleAndDescription } from '../views/composables/titleAndDescription'
-import { RouteLocationNormalizedLoaded } from 'vue-router'
 import { Locales } from '~/src/shared/i18n/locale'
 
 export const useBlogList = async (
