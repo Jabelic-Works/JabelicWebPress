@@ -18,6 +18,6 @@ export const useFetchBlogContent = async (
   },
   isObject?: boolean
 ): Promise<Article> => {
-  const content = await fetchBlogContent(id, currentLocale, config, (isObject = false))
+  const content = await fetchBlogContent(id, currentLocale, config, isObject)
   return content
 }

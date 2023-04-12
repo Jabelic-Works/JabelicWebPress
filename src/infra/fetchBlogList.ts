@@ -1,6 +1,4 @@
 import { Locales, locales } from '~~/src/shared/i18n/locale'
-import { useLocaleStore } from '~~/store/locale'
-import { RuntimeConfig } from '@nuxt/schema'
 import { MicroCMSListResponse } from 'microcms-js-sdk/dist/cjs/types'
 import { _fetch } from '~~/src/shared/utils/fetch'
 import { Category } from '~/src/entities/category'

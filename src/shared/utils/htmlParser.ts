@@ -125,7 +125,7 @@ if (import.meta.vitest) {
 }
 
 export const getStructuredMenu = (titleAndTags: TitleAndTag[]) => {
-  let obj: StructuredMenuItem[] = []
+  const obj: StructuredMenuItem[] = []
   titleAndTags.forEach((it) => {
     // H1を突っ込む
     if (it.tag === 'H1') {

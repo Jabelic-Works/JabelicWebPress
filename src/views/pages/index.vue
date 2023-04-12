@@ -1,12 +1,12 @@
 <script setup lang="ts">
   import { titles } from '~~/src/shared/i18n/constant'
   import { useLocaleStore } from '~~/store/locale'
-  import { useBlogList } from '~/src/interactors/blogList'
   import HomeContents from '~~/src/views/components/HomeContents.vue'
   import { RuntimeConfig } from '@nuxt/schema'
   import SelectLang from '~/src/views/components/Header/SelectLang.vue'
   import { useRootElementStore } from '~~/store/rootElement'
 
+  const { $getBlogList } = useNuxtApp()
   useHead({
     titleTemplate: '%s',
     bodyAttrs: {
@@ -18,14 +18,14 @@
     trans.value = false
   }, 2500)
   const store = useLocaleStore()
-  const _titles = computed(() => titles[store.getLocale])
+  const titleInTheLang = computed(() => titles[store.getLocale])
   const config: RuntimeConfig = useRuntimeConfig()
 
-  const contents = (await useLazyAsyncData(async () => await useBlogList(config, store.getLocale))).data
+  const contents = (await useLazyAsyncData(async () => await $getBlogList(config, store.getLocale))).data
   watch(
     () => store.getLocale,
     async () => {
-      contents.value = (await useLazyAsyncData(async () => await useBlogList(config, store.getLocale))).data.value
+      contents.value = (await useLazyAsyncData(async () => await $getBlogList(config, store.getLocale))).data.value
     }
   )
   /** i18n */
@@ -41,7 +41,7 @@
       <SelectLang />
     </div>
     <div class="sub-header">
-      <h1>{{ _titles.subTitle }}</h1>
+      <h1>{{ titleInTheLang.subTitle }}</h1>
     </div>
     <HomeContents v-if="contents" :contents="contents" />
   </div>
