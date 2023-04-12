@@ -223,6 +223,7 @@
   .root :deep(li) {
     font-size: 14px;
     margin-top: 1em;
+    margin-left: 3em;
   }
   .root :deep(a) {
     font-size: 14px;
