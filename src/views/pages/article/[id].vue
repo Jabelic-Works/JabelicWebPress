@@ -333,6 +333,7 @@
     .root :deep(li) {
       font-size: 10px;
       margin-top: 1em;
+      margin-left: 3em;
     }
     .root :deep(a) {
       font-size: 10px;
