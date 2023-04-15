@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1677937298962" clover="3.2.0">
-  <project timestamp="1677937298962" name="All files">
+<coverage generated="1681333932990" clover="3.2.0">
+  <project timestamp="1681333932991" name="All files">
     <metrics statements="171" coveredstatements="122" conditionals="26" coveredconditionals="23" methods="12" coveredmethods="5" elements="209" coveredelements="150" complexity="0" loc="171" ncloc="171" packages="1" files="1" classes="1"/>
     <file name="htmlParser.ts" path="/Users/jabelic/dev/JabelicWebPress/src/shared/utils/htmlParser.ts">
       <metrics statements="171" coveredstatements="122" conditionals="26" coveredconditionals="23" methods="12" coveredmethods="5"/>
