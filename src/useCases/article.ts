@@ -1,5 +1,6 @@
 import { Category } from '~/src/entities/category'
 
+/** microCMSのブログコンテンツの形式 */
 export interface Article {
   id: string
   createdAt: string
