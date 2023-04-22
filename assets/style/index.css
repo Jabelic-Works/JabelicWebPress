@@ -92,6 +92,13 @@
     animation: anim 0.5s ease-in-out;
 }
 
+body{
+  /** font kerning */
+  font-feature-settings:"palt";
+  letter-spacing: 0.05rem;
+  /** 行間  */
+  line-height: 1.5rem;
+}
 @keyframes anim{
     0%   { transform: translateX(0); width:100%; z-index:999; box-shadow: 10px 10px 10px #eaeaea; }
     60%  { z-index:999; \transform:  translateX(-10%);  }
