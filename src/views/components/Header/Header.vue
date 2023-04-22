@@ -13,11 +13,11 @@
     rootElementStore.getWidth < 600
       ? [
           { title: 'Home', link: route.path.includes('en') ? '/en' : '/ja', target: null },
-          { title: 'Profile', link: '/profile', target: null }
+          { title: 'Profile', link: route.path.includes('en') ? '/en/profile' : '/ja/profile', target: null }
         ]
       : [
           { title: 'Home', link: route.path.includes('en') ? '/en' : '/ja', target: null },
-          { title: 'Profile', link: '/profile', target: null },
+          { title: 'Profile', link: route.path.includes('en') ? '/en/profile' : '/ja/profile', target: null },
           { title: 'GitHub', link: 'https://github.com/jabelic', target: '_blank' }
         ]
   )

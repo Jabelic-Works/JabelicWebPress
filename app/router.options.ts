@@ -18,9 +18,19 @@ export default <RouterConfig>{
       path: '/en',
       component: () => import('~/src/views/pages/index.vue')
     },
+    // {
+    //   name: 'profile',
+    //   path: '/profile',
+    //   component: () => import('~/src/views/pages/profile.vue')
+    // },
     {
-      name: 'profile',
-      path: '/profile',
+      name: 'ja-profile',
+      path: '/ja/profile',
+      component: () => import('~/src/views/pages/profile.vue')
+    },
+    {
+      name: 'en-profile',
+      path: '/en/profile',
       component: () => import('~/src/views/pages/profile.vue')
     },
     {
@@ -29,7 +39,7 @@ export default <RouterConfig>{
       component: () => import('~/src/views/pages/article/[id].vue')
     },
     {
-      name: 'enArticle',
+      name: 'en-article',
       path: '/en/article/:id?',
       component: () => import('~/src/views/pages/article/[id].vue')
     }
