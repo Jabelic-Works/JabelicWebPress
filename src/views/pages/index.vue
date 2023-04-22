@@ -1,9 +1,7 @@
 <script setup lang="ts">
   import { titles } from '~~/src/shared/i18n/constant'
-  // import { useLocaleStore } from '~~/store/locale'
   import HomeContents from '~~/src/views/components/HomeContents.vue'
   import { RuntimeConfig } from '@nuxt/schema'
-  import Titles from '~~/src/views/components/Titles.vue'
   import SelectLang from '~/src/views/components/Header/SelectLang.vue'
   import { useRootElementStore } from '~~/store/rootElement'
   import { locales, Locales } from '~~/src/shared/i18n/locale'

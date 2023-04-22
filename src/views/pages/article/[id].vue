@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { RuntimeConfig } from '@nuxt/schema'
-  // import { useLocaleStore } from '~~/store/locale'
   import { useMenu } from '~~/src/views/composables/menu'
   import { useTitleAndDescription } from '~/src/views/composables/titleAndDescription'
   import { useHtmlParser } from '~/src/views/composables/htmlParser'

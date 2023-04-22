@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { ArticleCard } from '~~/src/entities/articleCard'
   import { Locales, locales } from '~~/src/shared/i18n/locale'
-  // import { useLocaleStore } from '~~/store/locale'
   import Tag from './Tag.vue'
 
   interface Props {
