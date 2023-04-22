@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import { ArticleCard } from '~~/src/entities/articleCard'
+  import { Locales, locales } from '~~/src/shared/i18n/locale'
   import Tag from './Tag.vue'
 
   interface Props {
     contents: ArticleCard
+    path: string
   }
   // NOTE: importした型を直接genericsに当てられない https://github.com/vuejs/core/issues/4294
   const props = withDefaults(defineProps<Props>(), {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { titles } from '~~/src/shared/i18n/constant'
   import { locales, Locales } from '~~/src/shared/i18n/locale'
-  import { useLocaleStore } from '~~/store/locale'
+  // import { useLocaleStore } from '~~/store/locale'
   import SelectLang from '~/src/views/components/Header/SelectLang.vue'
   import { useRootElementStore } from '~~/store/rootElement'
   const router = useRouter()
@@ -12,11 +12,11 @@
   const contents = computed<Contents>(() =>
     rootElementStore.getWidth < 600
       ? [
-          { title: 'Home', link: '/', target: null },
+          { title: 'Home', link: route.path.includes('en') ? '/en' : '/ja', target: null },
           { title: 'Profile', link: '/profile', target: null }
         ]
       : [
-          { title: 'Home', link: '/', target: null },
+          { title: 'Home', link: route.path.includes('en') ? '/en' : '/ja', target: null },
           { title: 'Profile', link: '/profile', target: null },
           { title: 'GitHub', link: 'https://github.com/jabelic', target: '_blank' }
         ]
@@ -26,15 +26,16 @@
   const appConfig = useAppConfig()
   const mainDarkColor = ref(appConfig.theme.colors.main)
 
-  /** 戻るボタン */
-  const backTo = () => router.push('/')
-
   /** i18n */
   const route = useRoute()
   const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth > 600)
 
   const headerHeight = ref('5vh')
   const mobileHeaderHeight = ref('5vh')
+
+  /** 戻るボタン */
+  // const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
+  const backTo = () => router.push(route.path.includes('en') ? '/en' : '/ja')
 </script>
 
 <template>

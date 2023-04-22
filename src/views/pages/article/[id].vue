@@ -1,25 +1,18 @@
 <script setup lang="ts">
   import { RuntimeConfig } from '@nuxt/schema'
-  import { useLocaleStore } from '~~/store/locale'
   import { useMenu } from '~~/src/views/composables/menu'
   import { useTitleAndDescription } from '~/src/views/composables/titleAndDescription'
   import { useHtmlParser } from '~/src/views/composables/htmlParser'
   import MenuBar from '~/src/views/components/MenuBar.vue'
   import { useRootElementStore } from '~~/store/rootElement'
+  import { Locales, locales } from '~~/src/shared/i18n/locale'
   const config: RuntimeConfig = useRuntimeConfig()
   const route = useRoute()
-  const store = useLocaleStore()
+
+  const locale = computed<Locales>(() => (route.path.includes('en') ? locales.en : locales.ja))
   const { $getBlogContent } = useNuxtApp()
-  const contents = (await useLazyAsyncData(async () => await $getBlogContent(route.params.id, store.getLocale, config)))
+  const contents = (await useLazyAsyncData(async () => await $getBlogContent(route.params.id, locale.value, config)))
     .data
-  watch(
-    () => store.getLocale,
-    async () => {
-      contents.value = (
-        await useLazyAsyncData(async () => await $getBlogContent(route.params.id, store.getLocale, config))
-      ).data.value
-    }
-  )
 
   const { structuredMenu } = useHtmlParser(contents)
   const { width, height } = useWindowSize()
