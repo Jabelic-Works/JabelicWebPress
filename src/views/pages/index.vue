@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import { titles } from '~~/src/shared/i18n/constant'
-  import { useLocaleStore } from '~~/store/locale'
+  // import { useLocaleStore } from '~~/store/locale'
   import HomeContents from '~~/src/views/components/HomeContents.vue'
   import { RuntimeConfig } from '@nuxt/schema'
+  import Titles from '~~/src/views/components/Titles.vue'
   import SelectLang from '~/src/views/components/Header/SelectLang.vue'
   import { useRootElementStore } from '~~/store/rootElement'
+  import { locales, Locales } from '~~/src/shared/i18n/locale'
 
   const { $getBlogList } = useNuxtApp()
   useHead({
@@ -17,21 +19,23 @@
   setTimeout(() => {
     trans.value = false
   }, 2500)
-  const store = useLocaleStore()
-  const titleInTheLang = computed(() => titles[store.getLocale])
   const config: RuntimeConfig = useRuntimeConfig()
 
-  const contents = (await useLazyAsyncData(async () => await $getBlogList(config, store.getLocale))).data
-  watch(
-    () => store.getLocale,
-    async () => {
-      contents.value = (await useLazyAsyncData(async () => await $getBlogList(config, store.getLocale))).data.value
-    }
-  )
   /** i18n */
   const route = useRoute()
   const rootElementStore = useRootElementStore()
   const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth <= 600)
+  const locale = computed<Locales>(() => (route.path.includes('en') ? locales.en : locales.ja))
+  const titleInTheLang = computed(() => titles[locale.value])
+
+  const contents = (await useLazyAsyncData(async () => await $getBlogList(config, locale.value))).data
+  watch(
+    locale,
+    async () => {
+      contents.value = (await useLazyAsyncData(async () => await $getBlogList(config, locale.value))).data.value
+    },
+    { immediate: true }
+  )
 </script>
 
 <template>
@@ -41,9 +45,11 @@
       <SelectLang />
     </div>
     <div class="sub-header">
-      <h1>{{ titleInTheLang.subTitle }}</h1>
+      <h1>
+        {{ titleInTheLang.subTitle }}
+      </h1>
     </div>
-    <HomeContents v-if="contents" :contents="contents" />
+    <HomeContents v-if="contents" :contents="contents" :lang="locale" />
   </div>
 </template>
 

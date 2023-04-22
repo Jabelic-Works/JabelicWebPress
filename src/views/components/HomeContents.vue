@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import ArticleCard from '~/src/views/components/ArticleCard.vue'
   import { ContentsCards } from '~/src/useCases/blogList'
+  import { Locales } from '~~/src/shared/i18n/locale'
 
   type Props = {
     contents: ContentsCards['contents']
+    lang: Locales
   }
 
   // https://github.com/vuejs/core/issues/4294
@@ -30,8 +32,9 @@
             id: article.id,
             description: article.description,
             tags: article.tags,
-            to: `article/${article.id}`
+            to: `${lang}/article/${article.id}`
           }"
+          :path="$route.path"
         />
       </div>
     </template>

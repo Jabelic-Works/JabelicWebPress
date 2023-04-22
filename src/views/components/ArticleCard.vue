@@ -1,9 +1,12 @@
 <script setup lang="ts">
   import { ArticleCard } from '~~/src/entities/articleCard'
+  import { Locales, locales } from '~~/src/shared/i18n/locale'
+  // import { useLocaleStore } from '~~/store/locale'
   import Tag from './Tag.vue'
 
   interface Props {
     contents: ArticleCard
+    path: string
   }
   // NOTE: importした型を直接genericsに当てられない https://github.com/vuejs/core/issues/4294
   const props = withDefaults(defineProps<Props>(), {
@@ -18,6 +21,10 @@
   const appConfig = useAppConfig()
   const mainDarkColor = ref(appConfig.theme.colors.main)
   const mainColor = ref(appConfig.theme.colors.main)
+
+  /** i18n */
+  const route = useRoute()
+  const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
 </script>
 
 <template>
