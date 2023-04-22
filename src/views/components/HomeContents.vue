@@ -32,7 +32,7 @@
             id: article.id,
             description: article.description,
             tags: article.tags,
-            to: `${lang}/article/${article.id}`
+            to: `/${lang}/article/${article.id}`
           }"
           :path="$route.path"
         />

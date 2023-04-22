@@ -20,10 +20,6 @@
   const appConfig = useAppConfig()
   const mainDarkColor = ref(appConfig.theme.colors.main)
   const mainColor = ref(appConfig.theme.colors.main)
-
-  /** i18n */
-  const route = useRoute()
-  const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
 </script>
 
 <template>

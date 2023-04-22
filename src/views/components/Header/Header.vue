@@ -12,11 +12,11 @@
   const contents = computed<Contents>(() =>
     rootElementStore.getWidth < 600
       ? [
-          { title: 'Home', link: '/', target: null },
+          { title: 'Home', link: route.path.includes('en') ? '/en' : '/ja', target: null },
           { title: 'Profile', link: '/profile', target: null }
         ]
       : [
-          { title: 'Home', link: '/', target: null },
+          { title: 'Home', link: route.path.includes('en') ? '/en' : '/ja', target: null },
           { title: 'Profile', link: '/profile', target: null },
           { title: 'GitHub', link: 'https://github.com/jabelic', target: '_blank' }
         ]
@@ -34,9 +34,8 @@
   const mobileHeaderHeight = ref('5vh')
 
   /** 戻るボタン */
-  // const backTo = () => router.push('/') // FIXME: en, ja
-  const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
-  const backTo = () => router.push(locale.value === locales.en ? '/en' : '/ja')
+  // const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
+  const backTo = () => router.push(route.path.includes('en') ? '/en' : '/ja')
 </script>
 
 <template>
