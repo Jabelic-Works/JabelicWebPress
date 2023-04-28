@@ -95,9 +95,12 @@
 body{
   /** font kerning */
   font-feature-settings:"palt";
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.01rem;
   /** 行間  */
   line-height: 1.5rem;
+}
+a{
+  word-break: break-all;
 }
 @keyframes anim{
     0%   { transform: translateX(0); width:100%; z-index:999; box-shadow: 10px 10px 10px #eaeaea; }

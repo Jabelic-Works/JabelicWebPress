@@ -95,6 +95,8 @@
 
 <style scoped>
   .root {
+    /** font kerning */
+    letter-spacing: 0.05rem;
     border-top: dashed red;
     border-top: thick double white;
   }
