@@ -17,11 +17,19 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/style/_reset.css', '~/assets/style/index.css'],
-  modules: ['@pinia/nuxt', '@vueuse/nuxt'],
+  modules: ['@pinia/nuxt', '@vueuse/nuxt', 'nuxt-mapple'],
+  mapple: {
+    basePath: 'https://webpress.jabelic.workers.dev',
+    static: ['/', '/en', '/ja']
+  },
   app: {
     head: {
       title: 'Jabelic Web Press',
-      meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'google-site-verification', content: 'OQd0Lr3Xe8OJczVAKFAVy6DlZaRVd3gRNjnrYVpDuZQ' }
+      ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/icon-16x16.png' } // これを追記する
       ]
