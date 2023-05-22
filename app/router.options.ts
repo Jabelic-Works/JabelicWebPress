@@ -6,7 +6,7 @@ export default <RouterConfig>{
       name: 'home',
       path: '/',
       component: () => import('~/src/views/pages/index.vue'),
-      redirect: { name: 'ja-home' }
+      redirect: { name: 'en-home' }
     },
     {
       name: 'ja-home',
@@ -18,11 +18,6 @@ export default <RouterConfig>{
       path: '/en',
       component: () => import('~/src/views/pages/index.vue')
     },
-    // {
-    //   name: 'profile',
-    //   path: '/profile',
-    //   component: () => import('~/src/views/pages/profile.vue')
-    // },
     {
       name: 'ja-profile',
       path: '/ja/profile',
