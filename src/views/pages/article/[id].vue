@@ -64,30 +64,34 @@
       </div>
     </div>
     <div v-else-if="menuState === 'small'" class="content-small">
-      <div class="title">
-        {{ extractTitle(contents?.title ?? '') }}
-      </div>
-      <div class="main">
-        <!-- 折りたたみ状態のmenu -->
-        <div @click.stop="openMenu" class="menu">
-          <template v-if="!menu.isOpen">
-            <div @click.stop="openMenu" class="menu-btn">
-              <img src="@/assets/img/menu_open.svg" alt="menu" class="menu-btn-img" />
-            </div>
-          </template>
+      <div class="blog-content-small">
+        <div class="title">
+          {{ extractTitle(contents?.title ?? '') }}
         </div>
-        <!-- 本文 -->
-        <div v-html="contents?.content" class="article"></div>
+        <div class="main">
+          <!-- 折りたたみ状態のmenu -->
+          <div @click.stop="openMenu" class="menu">
+            <template v-if="!menu.isOpen">
+              <div @click.stop="openMenu" class="menu-btn">
+                <img src="@/assets/img/menu_open.svg" alt="menu" class="menu-btn-img" />
+              </div>
+            </template>
+          </div>
+          <!-- 本文 -->
+          <div v-html="contents?.content" class="article"></div>
+        </div>
       </div>
-
+      <!-- <div v-show="menu.isOpen" class="folded-menu-bar"> -->
       <!-- overlay -->
       <div v-if="menu.isOpen" @click="closeMenu" class="shadow" :class="{ fadeout: transition }"></div>
       <!-- menu bar -->
       <MenuBar
+        class="menu-bar"
         :menus="{ menu, transition, transitionTimeoutMs, openMenu, closeMenu }"
         :structured-menus="{ structuredMenu }"
         :height="height"
       />
+      <!-- </div> -->
     </div>
     <div class="dummy-margin"></div>
   </div>
@@ -104,14 +108,13 @@
     background-color: #245941;
     height: 4vh;
     font-size: 1.8rem;
-    padding-left: 1rem;
+    padding-left: 2rem;
     display: grid;
     /* place-items: 縦 横;  */
     place-items: center start;
     white-space: pre;
     overflow-x: scroll;
   }
-  /* .content{} */
 
   .menu-btn {
     display: grid;
@@ -128,37 +131,6 @@
   }
   .menu:active {
     background-color: rgba(36, 89, 65, 0.8);
-  }
-
-  .shadow {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    min-height: v-bind(rootHeight);
-    background: rgba(100, 100, 100, 0.8);
-    animation: fadein v-bind(animationDuration) ease 0s 1 forwards;
-  }
-  @keyframes fadein {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  /** 背景要素(白い影)をfadeoutさせる */
-  .shadow.fadeout {
-    animation: fadeout v-bind(animationDuration) ease 0s 1 forwards;
-    height: 120%;
-  }
-  @keyframes fadeout {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
   }
 
   .article {
@@ -239,27 +211,83 @@
   @media screen and (max-width: 600px) {
     .title {
       background-color: #245941;
-      height: 5vh;
+      height: 3rem;
       font-size: 1rem;
+      padding-left: 1rem;
       place-items: center start;
       white-space: pre;
       overflow-x: scroll;
     }
 
     .main {
-      display: grid;
-      grid-template-columns: repeat(15, 1fr);
+      display: flex;
     }
     .main :deep(.menu) {
-      grid-column-start: 1;
-      grid-column-end: 2;
+      width: 20%;
       background-color: rgba(36, 89, 65, 1);
+      /* align-self: start;
+      height: 100vh; */
       position: sticky;
       top: 0px;
     }
+    .folded-menu-bar {
+      display: flex;
+      position: fixed;
+      /* position: absolute; */
+      top: 0px;
+      z-index: 9;
+      width: 100%;
+      height: 100%;
+      /* overflow: auto; */
+      /* position: sticky; */
+    }
+    .menu-bar {
+      /* position: sticky; */
+      /* position: fixed; */
+      align-self: start;
+      /* width: 300px; */
+      width: 60%;
+      min-height: v-bind(rootHeight);
+      background-color: #245941;
+      top: 0px;
+      left: 0px;
+      z-index: 9;
+      overflow: auto;
+    }
+    .shadow {
+      position: fixed;
+      /* position: sticky; */
+      left: 0;
+      top: 0;
+      width: 100%;
+      min-height: v-bind(rootHeight);
+      background: rgba(100, 100, 100, 0.8);
+      animation: fadein v-bind(animationDuration) ease 0s 1 forwards;
+    }
+    @keyframes fadein {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    /** 背景要素(白い影)をfadeoutさせる */
+    .shadow.fadeout {
+      animation: fadeout v-bind(animationDuration) ease 0s 1 forwards;
+      height: 120%;
+    }
+    @keyframes fadeout {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
     .main :deep(.article) {
-      grid-column-start: 2;
-      grid-column-end: 16;
+      /* grid-column-start: 2;
+      grid-column-end: 16; */
       padding: 2vw;
       margin: 2vw;
       /* margin-left: 7vw;f */
@@ -271,14 +299,6 @@
       /* height: 10vh; */
       display: grid;
       place-content: start center;
-    }
-    .menu-bar {
-      width: 60vw;
-      min-height: v-bind(rootHeight);
-      background-color: #245941;
-      top: 0vh;
-      left: 0px;
-      z-index: 1;
     }
     .article {
       padding: 3vw;

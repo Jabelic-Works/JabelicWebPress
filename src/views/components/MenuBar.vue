@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { Ref } from 'nuxt/dist/app/compat/vue-demi';
 import { StructuredMenuItem } from '~~/src/shared/utils/htmlParser';
 
 type Props = {
@@ -65,7 +64,7 @@ const animationDuration = ref(`${props.menus.transitionTimeoutMs / 1000}s` ?? '0
     background-color: rgba(217, 217, 217, 0.4);
   }
   .menu-bar-item {
-    padding: 1vh;
+    /* padding: 0.5vh; */
   }
 
   /* 左から右にフェードイン */
