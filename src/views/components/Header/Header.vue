@@ -1,7 +1,5 @@
 <script setup lang="ts">
   import { titles } from '~~/src/shared/i18n/constant'
-  import { locales, Locales } from '~~/src/shared/i18n/locale'
-  // import { useLocaleStore } from '~~/store/locale'
   import SelectLang from '~/src/views/components/Header/SelectLang.vue'
   import { useRootElementStore } from '~~/store/rootElement'
   const router = useRouter()
@@ -31,7 +29,7 @@
   const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth > 600)
 
   const headerHeight = ref('5vh')
-  const mobileHeaderHeight = ref('5vh')
+  const mobileHeaderHeight = ref('3rem')
 
   /** 戻るボタン */
   // const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
@@ -51,12 +49,12 @@
     <div class="right">
       <NuxtLink
         v-for="content in contents"
-        class="content set-item-center"
+        class="header-content set-item-center"
         :to="content.link"
         :target="content.target"
         rel="noopener"
       >
-        <span class="title">{{ content.title }}</span>
+        <span class="">{{ content.title }}</span>
       </NuxtLink>
     </div>
   </div>
@@ -107,7 +105,7 @@
     place-items: center;
   }
 
-  .content {
+  .header-content {
     display: grid;
     place-items: center;
     font-size: 14px;
@@ -116,10 +114,10 @@
     color: aliceblue;
     transition: 0.5s;
   }
-  .content:hover {
+  .header-content:hover {
     text-decoration: underline;
   }
-  .content:active {
+  .header-content:active {
     text-decoration: underline;
     color: rgba(30, 255, 0, 0.9);
   }
@@ -238,7 +236,7 @@
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
     }
-    .content {
+    .header-content {
       font-size: 14px;
       height: v-bind(mobileHeaderHeight);
       grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
@@ -246,10 +244,10 @@
       color: aliceblue;
       transition: 0.5s;
     }
-    .content:hover {
+    .header-content:hover {
       background-color: rgba(193, 193, 193, 0.2);
     }
-    .content:active {
+    .header-content:active {
       background-color: rgba(193, 193, 193, 0.5);
     }
   }
