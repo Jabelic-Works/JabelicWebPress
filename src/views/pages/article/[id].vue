@@ -108,7 +108,7 @@
     background-color: #245941;
     height: 4vh;
     font-size: 1.8rem;
-    padding-left: 1rem;
+    padding-left: 2rem;
     display: grid;
     /* place-items: 縦 横;  */
     place-items: center start;
@@ -213,6 +213,7 @@
       background-color: #245941;
       height: 3rem;
       font-size: 1rem;
+      padding-left: 1rem;
       place-items: center start;
       white-space: pre;
       overflow-x: scroll;

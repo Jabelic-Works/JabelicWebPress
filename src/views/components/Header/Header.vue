@@ -74,6 +74,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     place-items: center;
+    padding-left: 0.2rem;
   }
 
   .lang-switch {
