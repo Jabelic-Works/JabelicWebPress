@@ -11,8 +11,8 @@ export const useFetchBlogContent = async (
   id: string | string[],
   currentLocale: Locales,
   config: {
-    apikey: string
-    enApikey: string
+    apiKey: string
+    enApiKey: string
     apiEndpoint: string
     enApiEndpoint: string
   },

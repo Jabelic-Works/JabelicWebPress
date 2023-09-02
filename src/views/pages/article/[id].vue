@@ -10,16 +10,23 @@
   const route = useRoute()
 
   const locale = computed<Locales>(() => (route.path.includes('ja') ? locales.ja : locales.en))
-  const { $getBlogContent } = useNuxtApp()
-  const contents = (await useLazyAsyncData(async () => await $getBlogContent(route.params.id, locale.value, config)))
-    .data
+  const { $api } = useNuxtApp()
+  const contents = await useLazyAsyncData(
+    async () =>
+      await $api.getBlogContent(route.params.id, locale.value, {
+        apiKey: config.apiKey ?? config.public.apiKey,
+        enApiKey: config.enApiKey ?? config.public.enApiKey,
+        apiEndpoint: config.apiEndpoint ?? config.public.apiEndpoint,
+        enApiEndpoint: config.enApiEndpoint ?? config.public.enApiEndpoint
+      })
+  )
 
-  const { structuredMenu } = useHtmlParser(contents)
+  const { structuredMenu } = useHtmlParser(contents.data)
   const { width, height } = useWindowSize()
   const rootElementStore = useRootElementStore()
   const rootHeight = computed(() => `${rootElementStore.getHeight}px`)
   const { menu, transition, transitionTimeoutMs, openMenu, closeMenu, menuState } = useMenu(
-    contents,
+    contents.data,
     computed(() => width.value)
   )
 
@@ -28,7 +35,7 @@
 
   /** header */
   useHead({
-    titleTemplate: `%s - ${contents.value?.title}`,
+    titleTemplate: `%s - ${contents.data.value?.title}`,
     bodyAttrs: {
       class: 'rtl'
     }
@@ -47,26 +54,26 @@
   <div class="root" ref="el">
     <div v-if="menuState === 'large'" class="content">
       <div class="title">
-        {{ extractTitle(contents?.title ?? '') }}
+        {{ extractTitle(contents.data.value?.title ?? '') }}
       </div>
       <div class="main">
         <!-- 本文 -->
-        <div v-html="contents?.content" class="article"></div>
+        <div v-html="contents.data.value?.content" class="article"></div>
       </div>
     </div>
     <div v-else-if="menuState === 'medium'" class="content">
       <div class="title">
-        {{ extractTitle(contents?.title ?? '') }}
+        {{ extractTitle(contents.data.value?.title ?? '') }}
       </div>
       <div class="main">
         <!-- 本文 -->
-        <div v-html="contents?.content" class="article"></div>
+        <div v-html="contents.data.value?.content" class="article"></div>
       </div>
     </div>
     <div v-else-if="menuState === 'small'" class="content-small">
       <div class="blog-content-small">
         <div class="title">
-          {{ extractTitle(contents?.title ?? '') }}
+          {{ extractTitle(contents.data.value?.title ?? '') }}
         </div>
         <div class="main">
           <!-- 折りたたみ状態のmenu -->
@@ -78,7 +85,7 @@
             </template>
           </div>
           <!-- 本文 -->
-          <div v-html="contents?.content" class="article"></div>
+          <div v-html="contents.data.value?.content" class="article"></div>
         </div>
       </div>
       <!-- <div v-show="menu.isOpen" class="folded-menu-bar"> -->

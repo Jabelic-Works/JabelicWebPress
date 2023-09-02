@@ -4,7 +4,7 @@ import { useTitleAndDescription } from '../views/composables/titleAndDescription
 import { Locales } from '~/src/shared/i18n/locale'
 
 export const useBlogList = async (
-  config: { apikey: string; enApikey: string; apiEndpoint: string; enApiEndpoint: string },
+  config: { apiKey: string; enApiKey: string; apiEndpoint: string; enApiEndpoint: string },
   currentLocale: Locales
 ): Promise<ContentsCards['contents']> => {
   const { extractTitle, extractDescription } = useTitleAndDescription()

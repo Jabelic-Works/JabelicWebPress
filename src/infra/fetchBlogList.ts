@@ -7,24 +7,22 @@ import { Category } from '~/src/entities/category'
 // FIXME: categoryは配列？
 export const fetchBlogList = async (
   config: {
-    apikey: string
-    enApikey: string
+    apiKey: string
+    enApiKey: string
     apiEndpoint: string
     enApiEndpoint: string
   },
   currentLocale: Locales
-): Promise<
-  MicroCMSListResponse<{
-    id: string
-    title: string
-    updatedAt: string
-    category: Category
-  }>
-> => {
+): Promise<MicroCMSListResponse<{
+  id: string
+  title: string
+  updatedAt: string
+  category: Category
+}>> => {
   const endpoint = currentLocale === locales.ja ? config.apiEndpoint : config.enApiEndpoint
   const options = {
     headers: {
-      'X-MICROCMS-API-KEY': currentLocale === locales.ja ? config.apikey : config.enApikey
+      'X-MICROCMS-API-KEY': currentLocale === locales.ja ? config.apiKey : config.enApiKey
     }
   }
   // FIXME: define types(union)

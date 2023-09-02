@@ -4,7 +4,7 @@
   import { Locales } from '~~/src/shared/i18n/locale'
 
   type Props = {
-    contents: ContentsCards['contents']
+    contents: ContentsCards['contents'] | null
     lang: Locales
   }
 

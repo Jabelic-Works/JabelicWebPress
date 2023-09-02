@@ -3,14 +3,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // The private keys which are only available server-side
     apiSecret: 'jabelic',
-    apikey: process.env.NUXT_API_KEY,
-    enApikey: process.env.NUXT_EN_API_KEY,
+    apiKey: process.env.NUXT_API_KEY,
+    enApiKey: process.env.NUXT_EN_API_KEY,
     apiEndpoint: process.env.NUXT_MICROCMS_API_END_POINT,
     enApiEndpoint: process.env.NUXT_EN_MICROCMS_API_END_POINT,
     // Keys within public are also exposed client-side
     public: {
-      apikey: process.env.NUXT_API_KEY,
-      enApikey: process.env.NUXT_EN_API_KEY,
+      apiKey: process.env.NUXT_API_KEY,
+      enApiKey: process.env.NUXT_EN_API_KEY,
       apiEndpoint: process.env.NUXT_MICROCMS_API_END_POINT,
       enApiEndpoint: process.env.NUXT_EN_MICROCMS_API_END_POINT,
       apiBase: '/api'

@@ -11,8 +11,8 @@ export const fetchBlogContent = async (
   id: string | string[],
   currentLocale: Locales,
   config: {
-    apikey: string
-    enApikey: string
+    apiKey: string
+    enApiKey: string
     apiEndpoint: string
     enApiEndpoint: string
   },
@@ -23,7 +23,7 @@ export const fetchBlogContent = async (
       richEditorFormat: isObject ? 'object' : 'html'
     },
     headers: {
-      'X-MICROCMS-API-KEY': currentLocale === locales.ja ? config.apikey : config.enApikey
+      'X-MICROCMS-API-KEY': currentLocale === locales.ja ? config.apiKey : config.enApiKey
     }
   }
   const endpoint = currentLocale === locales.ja ? config.apiEndpoint + `/${id}` : config.enApiEndpoint + `/${id}`

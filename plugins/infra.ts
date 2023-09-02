@@ -1,11 +1,23 @@
 import { useBlogList } from '~~/src/interactors/blogList'
 import { useFetchBlogContent } from '~~/src/interactors/blogContents'
 
-export default defineNuxtPlugin((_) => {
+interface IApi {
+  getBlogContent: typeof useFetchBlogContent
+  getBlogList: typeof useBlogList
+}
+
+declare module '#app' {
+  interface NuxtApp {
+    $api: IApi
+  }
+}
+
+export default defineNuxtPlugin((): { provide: { api: IApi } } => {
+  const modules: IApi = {
+    getBlogContent: useFetchBlogContent,
+    getBlogList: useBlogList
+  }
   return {
-    provide: {
-      getBlogContent: useFetchBlogContent,
-      getBlogList: useBlogList
-    }
+    provide: { api: modules }
   }
 })
