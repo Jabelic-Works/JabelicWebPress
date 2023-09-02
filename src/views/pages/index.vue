@@ -6,7 +6,8 @@
   import { useRootElementStore } from '~~/store/rootElement'
   import { locales, Locales } from '~~/src/shared/i18n/locale'
 
-  const { $getBlogList } = useNuxtApp()
+  const config: RuntimeConfig = useRuntimeConfig()
+  const { $api } = useNuxtApp()
   useHead({
     titleTemplate: '%s',
     bodyAttrs: {
@@ -17,7 +18,6 @@
   setTimeout(() => {
     trans.value = false
   }, 2500)
-  const config: RuntimeConfig = useRuntimeConfig()
 
   /** i18n */
   const route = useRoute()
@@ -26,7 +26,18 @@
   const locale = computed<Locales>(() => (route.path.includes('ja') ? locales.ja : locales.en))
   const titleInTheLang = computed(() => titles[locale.value])
 
-  const contents = await useLazyAsyncData(async () => await $getBlogList(config, locale.value))
+  const { data: contents, error } = await useLazyAsyncData(
+    async () =>
+      await $api.getBlogList(
+        {
+          apiKey: config.apiKey ?? config.public.apiKey,
+          enApiKey: config.enApiKey ?? config.public.enApiKey,
+          apiEndpoint: config.apiEndpoint ?? config.public.apiEndpoint,
+          enApiEndpoint: config.enApiEndpoint ?? config.public.enApiEndpoint
+        },
+        locale.value
+      )
+  )
 </script>
 
 <template>
@@ -40,7 +51,8 @@
         {{ titleInTheLang.subTitle }}
       </h1>
     </div>
-    <HomeContents v-if="contents" :contents="contents.data.value" :lang="locale" />
+    <p v-if="error">{{ error }}</p>
+    <HomeContents :contents="contents" :lang="locale" />
   </div>
 </template>
 

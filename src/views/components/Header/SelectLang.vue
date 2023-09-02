@@ -12,17 +12,17 @@
       /** To English */
       case locales.en:
         if (route.path.includes('ja')) {
-          await router.replace(route.path.replace('ja', 'en'))
+          await router.push(route.path.replace('ja', 'en'))
         } else {
-          await router.replace('en' + route.path)
+          await router.push('en' + route.path)
         }
         break
       /** To Japanese */
       case locales.ja:
         if (route.path.includes('en')) {
-          await router.replace(route.path.replace('en', 'ja'))
+          await router.push(route.path.replace('en', 'ja'))
         } else {
-          await router.replace('ja' + route.path)
+          await router.push('ja' + route.path)
         }
         break
       default:
