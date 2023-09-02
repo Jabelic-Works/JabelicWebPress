@@ -1,7 +1,5 @@
 <script setup lang="ts">
   import { titles } from '~~/src/shared/i18n/constant'
-  import { locales, Locales } from '~~/src/shared/i18n/locale'
-  // import { useLocaleStore } from '~~/store/locale'
   import SelectLang from '~/src/views/components/Header/SelectLang.vue'
   import { useRootElementStore } from '~~/store/rootElement'
   const router = useRouter()
@@ -34,14 +32,13 @@
   const mobileHeaderHeight = ref('5vh')
 
   /** 戻るボタン */
-  // const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
   const backTo = () => router.push(route.path.includes('en') ? '/en' : '/ja')
 </script>
 
 <template>
   <div class="header-root">
     <span class="left">
-      <NuxtLink class="header-title" @click="($event) => backTo()">
+      <NuxtLink class="header-title" @click="backTo">
         {{ titles.ja.title }}
       </NuxtLink>
       <div v-if="isShowLangSwitcher" class="lang-switch">

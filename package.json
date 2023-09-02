@@ -37,7 +37,11 @@
   "overrides": {
     "vue": "latest"
   },
+  "engines": {
+    "npm": "please_use_yarn_instead_or_ni",
+    "pnpm": "please_use_yarn_instead_or_ni"
+  },
   "volta": {
-    "node": "17.9.1"
+    "node": "18.16.0"
   }
 }

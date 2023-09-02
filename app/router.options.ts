@@ -5,8 +5,7 @@ export default <RouterConfig>{
     {
       name: 'home',
       path: '/',
-      component: () => import('~/src/views/pages/index.vue'),
-      redirect: { name: 'en-home' }
+      component: () => import('~/src/views/pages/index.vue')
     },
     {
       name: 'ja-home',
