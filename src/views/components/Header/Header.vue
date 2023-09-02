@@ -32,14 +32,13 @@
   const mobileHeaderHeight = ref('3rem')
 
   /** 戻るボタン */
-  // const locale = ref<Locales>(route.path.includes('en') ? locales.en : locales.ja)
   const backTo = () => router.push(route.path.includes('en') ? '/en' : '/ja')
 </script>
 
 <template>
   <div class="header-root">
     <span class="left">
-      <NuxtLink class="header-title" @click="($event) => backTo()">
+      <NuxtLink class="header-title" @click="backTo">
         {{ titles.ja.title }}
       </NuxtLink>
       <div v-if="isShowLangSwitcher" class="lang-switch">

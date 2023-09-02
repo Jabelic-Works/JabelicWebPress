@@ -13,7 +13,7 @@
       class: 'rtl'
     }
   })
-  const trans = ref(true)
+  const trans = shallowRef(true)
   setTimeout(() => {
     trans.value = false
   }, 2500)
@@ -23,17 +23,10 @@
   const route = useRoute()
   const rootElementStore = useRootElementStore()
   const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth <= 600)
-  const locale = computed<Locales>(() => (route.path.includes('en') ? locales.en : locales.ja))
+  const locale = computed<Locales>(() => (route.path.includes('ja') ? locales.ja : locales.en))
   const titleInTheLang = computed(() => titles[locale.value])
 
-  const contents = (await useLazyAsyncData(async () => await $getBlogList(config, locale.value))).data
-  watch(
-    locale,
-    async () => {
-      contents.value = (await useLazyAsyncData(async () => await $getBlogList(config, locale.value))).data.value
-    },
-    { immediate: true }
-  )
+  const contents = await useLazyAsyncData(async () => await $getBlogList(config, locale.value))
 </script>
 
 <template>
@@ -47,7 +40,7 @@
         {{ titleInTheLang.subTitle }}
       </h1>
     </div>
-    <HomeContents v-if="contents" :contents="contents" :lang="locale" />
+    <HomeContents v-if="contents" :contents="contents.data.value" :lang="locale" />
   </div>
 </template>
 

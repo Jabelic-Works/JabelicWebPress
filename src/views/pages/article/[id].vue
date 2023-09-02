@@ -9,7 +9,7 @@
   const config: RuntimeConfig = useRuntimeConfig()
   const route = useRoute()
 
-  const locale = computed<Locales>(() => (route.path.includes('en') ? locales.en : locales.ja))
+  const locale = computed<Locales>(() => (route.path.includes('ja') ? locales.ja : locales.en))
   const { $getBlogContent } = useNuxtApp()
   const contents = (await useLazyAsyncData(async () => await $getBlogContent(route.params.id, locale.value, config)))
     .data
