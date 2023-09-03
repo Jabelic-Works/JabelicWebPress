@@ -28,7 +28,6 @@
   const route = useRoute()
   const isShowLangSwitcher = computed(() => !route.path.includes('article') && rootElementStore.getWidth > 600)
 
-  const headerHeight = ref('5vh')
   const mobileHeaderHeight = ref('3rem')
 
   /** 戻るボタン */
@@ -61,34 +60,23 @@
 
 <style scoped>
   .header-root {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: v-bind(headerHeight) 1fr;
-    height: v-bind(headerHeight);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 60px;
     background-color: v-bind(mainDarkColor);
+    background: linear-gradient(#245941 70%, #7fda24);
   }
   .left {
-    grid-column-start: 1;
-    grid-column-end: 7;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    place-items: center;
-    padding-left: 0.2rem;
+    display: flex;
+    align-items: center;
   }
-
-  .lang-switch {
-    display: grid;
-    place-items: center;
-  }
-
   .header-title {
     font-size: 18px;
-    height: v-bind(headerHeight);
-    text-decoration: none;
-    display: grid;
-    place-items: center;
     color: aliceblue;
-    transition: 0.5s;
+    margin-right: 1rem;
+    transition: color 0.3s;
   }
   .header-title:hover {
     text-decoration: underline;
@@ -96,31 +84,35 @@
   .header-title:active {
     color: rgba(30, 255, 0, 0.9);
   }
-
-  .right {
-    grid-column-start: 7;
-    grid-column-end: 11;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    place-items: center;
+  .lang-switch {
+    margin-left: 1rem;
   }
-
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
   .header-content {
-    display: grid;
-    place-items: center;
     font-size: 14px;
-    height: v-bind(headerHeight);
-    text-decoration: none;
     color: aliceblue;
-    transition: 0.5s;
+    transition: color 0.3s;
   }
   .header-content:hover {
     text-decoration: underline;
   }
   .header-content:active {
-    text-decoration: underline;
     color: rgba(30, 255, 0, 0.9);
   }
+
+  @media screen and (max-width: 480px) {
+    .header-root {
+      padding: 0 1rem;
+    }
+    .header-title {
+      font-size: 14px;
+    }
+  }
+
   .set-item-center {
     /** アイテムを中央にそろえる */
     display: grid;
@@ -204,10 +196,11 @@
   @media screen and (max-width: 600px) {
     .header-root {
       display: grid;
-      grid-template-columns: repeat(10, 1fr);
+      grid-template-columns: repeat(11, 1fr);
       grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
       height: v-bind(mobileHeaderHeight);
       background-color: v-bind(mainDarkColor);
+      background: linear-gradient(#245941 100%, #245941) !important;
     }
     .left {
       height: v-bind(mobileHeaderHeight);
@@ -231,13 +224,13 @@
     .right {
       height: v-bind(mobileHeaderHeight);
       grid-column-start: 8;
-      grid-column-end: 11;
+      grid-column-end: 12;
       justify-content: end;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
     }
     .header-content {
-      font-size: 14px;
+      font-size: 10px;
       height: v-bind(mobileHeaderHeight);
       grid-template-rows: v-bind(mobileHeaderHeight) 1fr;
       text-decoration: none;
