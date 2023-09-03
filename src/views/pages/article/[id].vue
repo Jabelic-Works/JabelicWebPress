@@ -108,16 +108,12 @@
   .root {
     /** font kerning */
     letter-spacing: 0.05rem;
-    border-top: dashed red;
-    border-top: thick double white;
   }
   .title {
-    background-color: #245941;
-    height: 4vh;
+    height: 6vh;
     font-size: 1.8rem;
     padding-left: 2rem;
     display: grid;
-    /* place-items: 縦 横;  */
     place-items: center start;
     white-space: pre;
     overflow-x: scroll;
