@@ -11,28 +11,28 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.54.0",
-    "@typescript-eslint/parser": "^5.54.0",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
     "@vitest/coverage-c8": "^0.29.1",
-    "@vue/eslint-config-prettier": "^7.1.0",
-    "@vueuse/core": "^9.13.0",
-    "@vueuse/nuxt": "^9.13.0",
-    "eslint": "^8.35.0",
-    "eslint-plugin-vue": "^9.9.0",
-    "nuxt": "^3.1.1",
-    "prettier": "^2.8.4",
-    "typescript": "^4.9.5",
-    "vitest": "^0.29.1",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vueuse/core": "^10.4.1",
+    "@vueuse/nuxt": "^10.4.1",
+    "eslint": "^8.48.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "nuxt": "^3.7.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.3",
     "vitest-fetch-mock": "^0.2.2"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.6",
+    "@pinia/nuxt": "^0.4.11",
     "@types/highlight.js": "^10.1.0",
-    "highlight.js": "^11.7.0",
-    "microcms-js-sdk": "^2.3.2",
+    "highlight.js": "^11.8.0",
+    "microcms-js-sdk": "^2.5.0",
     "nuxt-mapple": "^1.0.1",
-    "pinia": "^2.0.30"
+    "pinia": "^2.1.6"
   },
   "overrides": {
     "vue": "latest"
