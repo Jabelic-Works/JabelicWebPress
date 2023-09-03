@@ -1,7 +1,11 @@
-<script setup lang="ts">
-  const profiles = ref({
-    belongings: '所属: 東京都立産業技術大学院大学産業技術研究科産業技術専攻情報アーキテクチャコース',
-    graduate: '卒業: 明治大学総合数理学部現象数理学科',
+<script lang="ts" setup>
+  import { Locales, locales } from '~~/src/shared/i18n/locale'
+  const route = useRoute()
+  const locale = computed<Locales>(() => (route.path.includes('ja') ? locales.ja : locales.en))
+  const profiles = {
+    belongings:  locale.value === locales.en ? 'Belongings: Advanced Institute of Industrial Technology, Tokyo.' : '所属: 東京都立産業技術大学院大学産業技術研究科産業技術専攻情報アーキテクチャコース' ,
+    graduate:    locale.value === locales.en ? 'Graduates: Bachelor of Science, MEIJI UNIVERSITY, Tokyo.' : '卒業: 明治大学総合数理学部現象数理学科',
+    bluesky: 'bluesky: @jabelic.bsky.social',
     twitter: {
       title: 'Twitter: @Jabelic_',
       link: 'https://twitter.com/jabelic_'
@@ -11,10 +15,10 @@
       link: 'https://github.com/jabelic'
     },
     scrapbox: {
-      title: 'Scrapbox: Scrapbox',
+      title: 'Scrapbox: jabelic-public',
       link: 'https://scrapbox.io/jabelic-public'
     }
-  })
+  }
   const appConfig = useAppConfig()
   const mainColor = ref(appConfig.theme.colors.main)
 
@@ -26,10 +30,11 @@
 <template>
   <div class="transition" :class="{ 'anim-trans': trans }"></div>
   <div class="root">
-    <h1>profile</h1>
+    <h1>Profile</h1>
     <div class="contents">
       <div class="belongings profile-card">{{ profiles.belongings }}</div>
       <div class="graduate profile-card">{{ profiles.graduate }}</div>
+      <div class="bluesky profile-card">{{ profiles.bluesky }}</div>
       <NuxtLink class="twitter profile-card" :to="profiles.twitter.link" target="_blank" rel="noopener">
         {{ profiles.twitter.title }}</NuxtLink
       >
