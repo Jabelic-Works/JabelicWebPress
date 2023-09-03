@@ -3,8 +3,14 @@
   const route = useRoute()
   const locale = computed<Locales>(() => (route.path.includes('ja') ? locales.ja : locales.en))
   const profiles = {
-    belongings:  locale.value === locales.en ? 'Belongings: Advanced Institute of Industrial Technology, Tokyo.' : '所属: 東京都立産業技術大学院大学産業技術研究科産業技術専攻情報アーキテクチャコース' ,
-    graduate:    locale.value === locales.en ? 'Graduates: Bachelor of Science, MEIJI UNIVERSITY, Tokyo.' : '卒業: 明治大学総合数理学部現象数理学科',
+    belongings:
+      locale.value === locales.ja
+        ? '所属: 東京都立産業技術大学院大学産業技術研究科産業技術専攻情報アーキテクチャコース'
+        : 'Belongings: Advanced Institute of Industrial Technology, Tokyo.',
+    graduate:
+      locale.value === locales.ja
+        ? '卒業: 明治大学総合数理学部現象数理学科'
+        : 'Graduates: Bachelor of Science, MEIJI UNIVERSITY, Tokyo.',
     bluesky: 'bluesky: @jabelic.bsky.social',
     twitter: {
       title: 'Twitter: @Jabelic_',
